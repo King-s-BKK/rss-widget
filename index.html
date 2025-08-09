@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSS Feed Widget</title>
+  <script src="https://cdn.jsdelivr.net/gh/55sketch/simple-rss/simple-rss.js"></script>
+  <style>
+    .rss-item {
+      margin-bottom: 15px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .rss-item h3 {
+      margin: 0;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Latest News from King's Bangkok</h1>
+  <div data-rss-feed="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284"
+       data-rss-max="3"
+       data-rss-title-wrapper="h3"
+       data-rss-link-titles="true"
+       class="rss-widget">
+  </div>
+</body>
+</html>
