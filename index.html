@@ -45,26 +45,20 @@
 
   <script>
     const rssUrl = "https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8";
-    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`;
+    const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
-    fetch(proxyUrl)
+    fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data.contents, "text/xml");
-        const items = xml.querySelectorAll("item");
         const newsContainer = document.getElementById("news");
+        const items = data.items.slice(0, 3); // Get only 3 articles
 
-        for (let i = 0; i < Math.min(3, items.length); i++) {
-          const item = items[i];
-          const title = item.querySelector("title").textContent;
-          const link = item.querySelector("link").textContent;
-
+        items.forEach(item => {
           const newsItem = document.createElement("div");
           newsItem.className = "news-item";
-          newsItem.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
+          newsItem.innerHTML = `<a href="${item.link}" target="_blank">${item.title}</a>`;
           newsContainer.appendChild(newsItem);
-        }
+        });
       })
       .catch(err => {
         document.getElementById("news").innerHTML = "<p>Failed to load news feed.</p>";
