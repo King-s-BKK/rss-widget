@@ -2,29 +2,78 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>RSS Feed Widget</title>
-  <script src="https://cdn.jsdelivr.net/gh/55sketch/simple-rss/simple-rss.js"></script>
+  <title>RSS Feed Viewer</title>
   <style>
-    .rss-item {
-      margin-bottom: 15px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-    }
-    .rss-item h3 {
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
       margin: 0;
-      font-size: 1em;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .feed-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .article {
+      margin-bottom: 30px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 20px;
+    }
+    .article h2 {
+      font-size: 20px;
+      color: #0056b3;
+      margin-bottom: 10px;
+    }
+    .article p {
+      color: #555;
+    }
+    .article a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+    .article a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>Latest News from King's Bangkok</h1>
-  <div data-rss-feed="https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8"
-       data-rss-max="3"
-       data-rss-title-wrapper="h3"
-       data-rss-link-titles="true"
-       class="rss-widget">
+  <h1>Latest News</h1>
+  <div class="feed-container" id="rss-feed">
+    <!-- Articles will be injected here -->
   </div>
+
+  <script>
+    const RSS_URL = "https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8";
+
+    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`)
+      .then(response => response.json())
+      .then(data => {
+        const container = document.getElementById("rss-feed");
+        const items = data.items.slice(0, 3); // Get top 3 articles
+
+        items.forEach(item => {
+          const article = document.createElement("div");
+          article.className = "article";
+          article.innerHTML = `
+            <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
+            <p><strong>Published:</strong> ${new Date(item.pubDate).toLocaleDateString()}</p>
+            <p>${item.description}</p>
+          `;
+          container.appendChild(article);
+        });
+      })
+      .catch(error => {
+        document.getElementById("rss-feed").innerHTML = "<p>Failed to load RSS feed.</p>";
+        console.error("RSS fetch error:", error);
+      });
+  </script>
 </body>
 </html>
-
