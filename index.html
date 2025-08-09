@@ -6,8 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
-      margin: 0;
+      background: #f9f9f9;
       padding: 20px;
     }
     h1 {
@@ -45,30 +44,38 @@
   </style>
 </head>
 <body>
-  <h1>Latest News</h1>
+  <h1>Whole School News</h1>
   <div class="feed-container" id="rss-feed">
-    <!-- Articles will be injected here -->
+    <p>Loading articles...</p>
   </div>
 
   <script>
     const RSS_URL = "https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8";
 
-    fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS_URL)}`)
-      .then(response => response.json())
+    fetch(RSS_URL)
+      .then(response => response.text())
+      .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
       .then(data => {
+        const items = data.querySelectorAll("item");
         const container = document.getElementById("rss-feed");
-        const items = data.items.slice(0, 3); // Get top 3 articles
+        container.innerHTML = "";
 
-        items.forEach(item => {
+        for (let i = 0; i < Math.min(3, items.length); i++) {
+          const item = items[i];
+          const title = item.querySelector("title").textContent;
+          const link = item.querySelector("link").textContent;
+          const pubDate = new Date(item.querySelector("pubDate").textContent).toLocaleDateString();
+          const description = item.querySelector("description").textContent;
+
           const article = document.createElement("div");
           article.className = "article";
           article.innerHTML = `
-            <h2><a href="${item.link}" target="_blank">${item.title}</a></h2>
-            <p><strong>Published:</strong> ${new Date(item.pubDate).toLocaleDateString()}</p>
-            <p>${item.description}</p>
+            <h2><a href="${link}" target="_blank">${title}</a></h2>
+            <p><strong>Published:</strong> ${pubDate}</p>
+            <p>${description}</p>
           `;
           container.appendChild(article);
-        });
+        }
       })
       .catch(error => {
         document.getElementById("rss-feed").innerHTML = "<p>Failed to load RSS feed.</p>";
