@@ -2,84 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>RSS Feed Viewer</title>
+  <title>CSS News Feed</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f9f9f9;
+      background: #f4f4f4;
       padding: 20px;
     }
     h1 {
-      text-align: center;
       color: #333;
+      text-align: center;
     }
-    .feed-container {
-      max-width: 800px;
-      margin: auto;
+    .news-container {
       background: #fff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 600px;
+      margin: auto;
     }
-    .article {
-      margin-bottom: 30px;
+    .news-item {
+      margin-bottom: 15px;
+      padding-bottom: 10px;
       border-bottom: 1px solid #ddd;
-      padding-bottom: 20px;
     }
-    .article h2 {
-      font-size: 20px;
-      color: #0056b3;
-      margin-bottom: 10px;
+    .news-item:last-child {
+      border-bottom: none;
     }
-    .article p {
-      color: #555;
-    }
-    .article a {
-      color: #0077cc;
+    .news-item a {
       text-decoration: none;
+      color: #0077cc;
+      font-weight: bold;
     }
-    .article a:hover {
+    .news-item a:hover {
       text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <h1>Whole School News</h1>
-  <div class="feed-container" id="rss-feed">
-    <p>Loading articles...</p>
-  </div>
+  <h1>Latest CSS News</h1>
+  <div class="news-container" id="news"></div>
 
   <script>
-    const RSS_URL = "https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8";
+    const rssUrl = "https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8";
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}`;
 
-    fetch(RSS_URL)
-      .then(response => response.text())
-      .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+    fetch(proxyUrl)
+      .then(response => response.json())
       .then(data => {
-        const items = data.querySelectorAll("item");
-        const container = document.getElementById("rss-feed");
-        container.innerHTML = "";
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data.contents, "text/xml");
+        const items = xml.querySelectorAll("item");
+        const newsContainer = document.getElementById("news");
 
         for (let i = 0; i < Math.min(3, items.length); i++) {
           const item = items[i];
           const title = item.querySelector("title").textContent;
           const link = item.querySelector("link").textContent;
-          const pubDate = new Date(item.querySelector("pubDate").textContent).toLocaleDateString();
-          const description = item.querySelector("description").textContent;
 
-          const article = document.createElement("div");
-          article.className = "article";
-          article.innerHTML = `
-            <h2><a href="${link}" target="_blank">${title}</a></h2>
-            <p><strong>Published:</strong> ${pubDate}</p>
-            <p>${description}</p>
-          `;
-          container.appendChild(article);
+          const newsItem = document.createElement("div");
+          newsItem.className = "news-item";
+          newsItem.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
+          newsContainer.appendChild(newsItem);
         }
       })
-      .catch(error => {
-        document.getElementById("rss-feed").innerHTML = "<p>Failed to load RSS feed.</p>";
-        console.error("RSS fetch error:", error);
+      .catch(err => {
+        document.getElementById("news").innerHTML = "<p>Failed to load news feed.</p>";
+        console.error("RSS fetch error:", err);
       });
   </script>
 </body>
