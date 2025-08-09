@@ -10,8 +10,8 @@
       padding: 20px;
     }
     h1 {
-      color: #333;
       text-align: center;
+      color: #333;
     }
     .news-container {
       background: #fff;
@@ -41,16 +41,35 @@
 </head>
 <body>
   <h1>Latest CSS News</h1>
-  <div class="news-container">
-    <div class="news-item">
-      <a href="https://kingsbangkok.isamshosting.cloud/news/1" target="_blank">CSS Department Launches New Curriculum</a>
-    </div>
-    <div class="news-item">
-      <a href="https://kingsbangkok.isamshosting.cloud/news/2" target="_blank">Student Showcase: Innovative Web Projects</a>
-    </div>
-    <div class="news-item">
-      <a href="https://kingsbangkok.isamshosting.cloud/news/3" target="_blank">Upcoming CSS Seminar: Trends in Front-End Design</a>
-    </div>
-  </div>
+  <div class="news-container" id="news"></div>
+
+  <script>
+    const feedUrl = "https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/rss/?category=8";
+    const proxy = `https://api.allorigins.win/raw?url=${encodeURIComponent(feedUrl)}`;
+
+    fetch(proxy)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+
+        const links = [...doc.querySelectorAll('a.Link')];
+        const newsContainer = document.getElementById("news");
+
+        links.slice(0, 3).forEach(link => {
+          const title = link.textContent;
+          const href = link.getAttribute("href");
+
+          const newsItem = document.createElement("div");
+          newsItem.className = "news-item";
+          newsItem.innerHTML = `<a href="https://kingsbangkok.isamshosting.cloud/${href}" target="_blank">${title}</a>`;
+          newsContainer.appendChild(newsItem);
+        });
+      })
+      .catch(err => {
+        document.getElementById("news").innerHTML = "<p>Failed to load news feed.</p>";
+        console.error("Fetch error:", err);
+      });
+  </script>
 </body>
 </html>
