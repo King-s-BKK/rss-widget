@@ -1,51 +1,64 @@
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>RSS Feed Widget</title>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    .rss-item { margin-bottom: 15px; }
-    .rss-item h3 { margin: 0; font-size: 18px; }
-    .rss-item p { margin: 5px 0; color: #555; }
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .rss-item {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+    .rss-item h3 {
+      margin: 0;
+      font-size: 20px;
+      color: #0077cc;
+    }
+    .rss-item p {
+      margin: 5px 0;
+      color: #555;
+    }
   </style>
 </head>
 <body>
-  <h1>Latest News</h1>
-  <div id="rss-feed">Loading...</div>
+  <h1>Latest News from Kings Bangkok</h1>
+  <div id="rss-feed">Loading feed...</div>
 
-<script>
-  const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhN8B68pOfHaGlzQZHzJq3ZbP5Wjq5U7bjE8CpgmCvQwFuCb5AyuuR0rVHT1BZ3XYcvxNyAeG1bN7vuglGruQS5Eooy_6DMJjnkMpV-26zgtnFfBHfhH7UipcYDOcqGnP1XFoRB_1Bs0nJhS4quuCKJll0eeaf439jxFoObSIeQyUfFX8OP8aEVvxO-lSlsdliByJUoxtGGgyYOsS8MIkaa9Qw1DkMRWvOjj_acLTC0hbQwV5lb3ZfctW0mMTbdYMymNmXSaC-ZhZQkRL-rMoDtVtt0FYpnnJF2IPss&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6';
+  <script>
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLhN8B68pOfHaGlzQZHzJq3ZbP5Wjq5U7bjE8CpgmCvQwFuCb5AyuuR0rVHT1BZ3XYcvxNyAeG1bN7vuglGruQS5Eooy_6DMJjnkMpV-26zgtnFfBHfhH7UipcYDOcqGnP1XFoRB_1Bs0nJhS4quuCKJll0eeaf439jxFoObSIeQyUfFX8OP8aEVvxO-lSlsdliByJUoxtGGgyYOsS8MIkaa9Qw1DkMRWvOjj_acLTC0hbQwV5lb3ZfctW0mMTbdYMymNmXSaC-ZhZQkRL-rMoDtVtt0FYpnnJF2IPss&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6'; // Replace with your actual URL
 
-  fetch(feedUrl)
-    .then(response => response.json())
-    .then(items => {
-      const container = document.getElementById('rss-feed');
-      container.innerHTML = '';
-      items.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'rss-item';
-        div.innerHTML = `
-          <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
-          <p>${item.pubDate}</p>
-          <p>${item.description}</p>
-        `;
-        container.appendChild(div);
+    fetch(feedUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(items => {
+        const container = document.getElementById('rss-feed');
+        container.innerHTML = '';
+        items.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'rss-item';
+          div.innerHTML = `
+            <h3><a href="${item.link}" target="_blank">${item.title}</a></h3>
+            <p><strong>Date:</strong> ${new Date(item.pubDate).toLocaleDateString()}</p>
+            <p>${item.description}</p>
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(error => {
+        document.getElementById('rss-feed').innerText = 'Failed to load feed.';
+        console.error('Error fetching RSS:', error);
       });
-    })
-    .catch(error => {
-      document.getElementById('rss-feed').innerText = 'Failed to load feed.';
-      console.error('Error fetching RSS:', error);
-    });
-</script>
-
-
-
-
-
+  </script>
 </body>
 </html>
