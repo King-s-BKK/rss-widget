@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSS Feed Widget</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      width: 100%;
+      height: auto; /* Full viewport height (VH)*/
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    #rss-feed {
+      flex: 1; /* Take up remaining space */
+      overflow-y: auto; /* Scroll if content overflows */
+      padding: 10px;
+    }
+
+    .rss-item {
+      border-bottom: 1px solid #ddd;
+      padding: 5px 0;
+    }
+
+    .rss-item h3 {
+      margin: 0;
+      font-size: 12px;
+      color: #0077cc;
+      font-weight: 300;
+    }
+
+    .rss-item p {
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="rss-feed">Loading feed...</div>
+
+  <script>
+    const feedUrl = 'https://script.google.com/macros/s/AKfycbz9HaN5c8OsoN4VWUbXx-I6sUmPpTyOrm4xgBQb3i-DPG0750YA1FkOf9gFYN9pXp98wA/exec';
+
+    fetch(feedUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(items => {
+        const container = document.getElementById('rss-feed');
+        container.innerHTML = '';
+        items.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'rss-item';
+          div.innerHTML = `
+          
+            <h3>
+    <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/287" target="_blank">
+      ${item.title}
+    </a>
+    <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+      (${new Date(item.pubDate).toLocaleDateString()})
+    </span>
+  </h3>
+  
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(error => {
+        document.getElementById('rss-feed').innerText = 'No Senior School News.';
+        console.error('Error fetching RSS:', error);
+      });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
