@@ -5,9 +5,11 @@
   <title>RSS Feed Widget</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      font-weight: 300;
       padding: 20px;
-      max-width: 800px;
+      width: auto;
       margin: auto;
     }
     h1 {
@@ -28,13 +30,15 @@
       color: #555;
     }
   </style>
+  <!-- Load Lato font from Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 
   <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiwr7AHuSgIhe3mxk-gjRrUQXVtiz-FuBmihVD2G8JKL_QGHgU8ow4zPj325V4C1G-Wwv7Wc8-U-AIgV-GtdaSFuQMhc12MqiFQfVAqNSG6APgFTkQECR3QNzJNw-ZArVU1_rSWDuBRSCSqP0Um56oGUxdoUT5gO0IhtdOdQzq_cxqPLgkjgtUVdO5r64toJzIv8YLKQgVuxQ8GfdnRbaeasRlInzBs77Cs1joR6JWxe8uWgPb8KsrehAIKrMiumzm6fwTSsUHP4CxrtNk2yvNCpltwLnVjJi8ziUV7&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6'; // Replace with your actual URL
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiwr7AHuSgIhe3mxk-gjRrUQXVtiz-FuBmihVD2G8JKL_QGHgU8ow4zPj325V4C1G-Wwv7Wc8-U-AIgV-GtdaSFuQMhc12MqiFQfVAqNSG6APgFTkQECR3QNzJNw-ZArVU1_rSWDuBRSCSqP0Um56oGUxdoUT5gO0IhtdOdQzq_cxqPLgkjgtUVdO5r64toJzIv8YLKQgVuxQ8GfdnRbaeasRlInzBs77Cs1joR6JWxe8uWgPb8KsrehAIKrMiumzm6fwTSsUHP4CxrtNk2yvNCpltwLnVjJi8ziUV7&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6';
 
     fetch(feedUrl)
       .then(response => {
@@ -50,7 +54,6 @@
           div.innerHTML = `
             <h3><a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284" target="_blank">${item.title}</a></h3>
             <p><strong>Date:</strong> ${new Date(item.pubDate).toLocaleDateString()}</p>
-         
           `;
           container.appendChild(div);
         });
@@ -62,9 +65,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
