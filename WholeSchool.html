@@ -68,7 +68,7 @@
           div.className = 'rss-item';
           div.innerHTML = `
             <h3><a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284" target="_blank">${item.title}</a></h3>
-            <p><strong>Date:</strong> ${new Date(item.pubDate).toLocaleDateString()}</p>
+            <strong>Date:</strong> ${new Date(item.pubDate).toLocaleDateString()}
           `;
           container.appendChild(div);
         });
@@ -80,6 +80,7 @@
   </script>
 </body>
 </html>
+
 
 
 
