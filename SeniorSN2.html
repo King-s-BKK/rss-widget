@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RSS Feed Widget</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      width: 100%;
+      height: auto; /* Full viewport height (VH)*/
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      font-size: 12px;
+      font-weight: 300;
+    }
+
+    #rss-feed {
+      flex: 1; /* Take up remaining space */
+      overflow-y: auto; /* Scroll if content overflows */
+      padding: 10px;
+    }
+
+    .rss-item {
+      border-bottom: 1px solid #ddd;
+      padding: 5px 0;
+    }
+
+    .rss-item h3 {
+      margin: 0;
+      font-size: 12px;
+      color: #0077cc;
+      font-weight: 300;
+    }
+
+    .rss-item p {
+      margin: 5px 0;
+      color: #555;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="rss-feed">Loading feed...</div>
+
+  <script>
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLj_FaRpYCjvpPjvTD6o6RmiOX5KH6R0k1lMZd1Rlej9K9rVa4-NGgJkvGO79N15nG6E3l8RZSIH97eAZt2noU3go0TiAZA5IKLlXOsKOZmPdnxbfCuO2k_1A33AhLCnSJP50CiB7woN8UhOSnF72juzxybDrAKEwI8Af1ylCMms9onHanhYiuCEzJKN6dvGSdeHM_enFdWxkoypo7OUvf0ig-a_nH7Wih1yEjYThttpEaNMZjr60VgbVek2NxK1Kv4bj5udvNevvMZpLh_ccHO9HFqcCkgtc0VgLL6M&lib=Mq_O4YljyEVLtU6HoXfKoQcczIEwHG0G6';
+
+    fetch(feedUrl)
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
+      })
+      .then(items => {
+        const container = document.getElementById('rss-feed');
+        container.innerHTML = '';
+        items.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'rss-item';
+          div.innerHTML = `
+          
+            <h3>
+    <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/287" target="_blank">
+      ${item.title}
+    </a>
+    <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+      (${new Date(item.pubDate).toLocaleDateString()})
+    </span>
+  </h3>
+  
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(error => {
+        document.getElementById('rss-feed').innerText = 'Failed to load feed.';
+        console.error('Error fetching RSS:', error);
+      });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
