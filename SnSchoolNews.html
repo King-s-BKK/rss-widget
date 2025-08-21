@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>King's Bangkok News</title>
+  <style>
+    body {
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 300;
+      padding: 20px;
+      background: #fff;
+      color: #333;
+    }
+
+    #rss-feed p {
+      margin: 10px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #eee;
+    }
+
+    #rss-feed a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    #rss-feed a:hover {
+      text-decoration: underline;
+    }
+
+    small {
+      color: #666;
+    }
+  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <h2>Latest News</h2>
+  <div id="rss-feed">Loading news...</div>
+
+  <script>
+    const feedUrl = 'https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/xml/?category=11';
+
+    fetch(feedUrl)
+      .then(response => response.text())
+      .then(str => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(str, "application/xml");
+
+        const items = xml.querySelectorAll("item");
+        const container = document.getElementById('rss-feed');
+        container.innerHTML = "";
+
+        if (items.length === 0) {
+          container.innerHTML = "<p>No news items found.</p>";
+          return;
+        }
+
+        // Show only the latest 3 items
+        for (let i = 0; i < Math.min(3, items.length); i++) {
+          const item = items[i];
+          const title = item.querySelector("title")?.textContent || "Untitled";
+          const link = item.querySelector("link")?.textContent || "#";
+          const pubDate = new Date(item.querySelector("pubDate")?.textContent || Date.now()).toLocaleDateString();
+
+          const p = document.createElement("p");
+          p.innerHTML = `
+            <a href="${link}" target="_blank">${title}</a><br>
+            <small>${pubDate}</small>
+          `;
+          container.appendChild(p);
+        }
+      })
+      .catch(err => {
+        console.error("Error loading XML feed:", err);
+        document.getElementById('rss-feed').innerText = "Error loading news feed.";
+      });
+  </script>
+
+</body>
+</html>
