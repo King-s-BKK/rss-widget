@@ -2,81 +2,98 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>King's Bangkok News</title>
+  <title>RSS Feed Widget</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
       font-family: 'Lato', sans-serif;
       font-size: 12px;
       font-weight: 300;
-      padding: 20px;
-      background: #fff;
+      width: 100%;
+      height: auto; /* Full viewport height (VH)*/
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1 {
+      text-align: center;
       color: #333;
+      font-size: 12px;
+      font-weight: 300;
     }
 
-    #rss-feed p {
-      margin: 10px 0;
-      padding-bottom: 8px;
-      border-bottom: 1px solid #eee;
+    #rss-feed {
+      flex: 1; /* Take up remaining space */
+      overflow-y: auto; /* Scroll if content overflows */
+      padding: 10px;
     }
 
-    #rss-feed a {
+    .rss-item {
+      border-bottom: 1px solid #ddd;
+      padding: 5px 0;
+    }
+
+    .rss-item h3 {
+      margin: 0;
+      font-size: 12px;
       color: #0077cc;
-      text-decoration: none;
+      font-weight: 300;
     }
 
-    #rss-feed a:hover {
-      text-decoration: underline;
-    }
-
-    small {
-      color: #666;
+    .rss-item p {
+      margin: 5px 0;
+      color: #555;
     }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <h2>Latest News</h2>
-  <div id="rss-feed">Loading news...</div>
+  <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://kingsbangkok.isamshosting.cloud/modules/newsmanager/feeds/xml/?category=11';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi8UyEf9puwQK_n62veGCcycZdMPN2vAe0NIx6O9Z_4ZL2nudRF1HgUqn-pWLnQOGlJcwMcR4ZPRMeafdMIXuStdP1PsTELJsjh9Zf2Y6ZVsD-dFhNEL0QgsPjx_gcxzRK_KR04YqAKLOxCOS3_u726SUET8oLQVRpZLKsNP8ZEWE3qTfrmG6Z-IjSbDrrJNqxteEARFZCTldIr1S4xDb3_KX6EZn0gS3_kc244l40Dum1MDcg-11j81JCJbfZihzErMqbz63Y7N0eu42a8b_7VJgxDB7RGqPcp0klp&lib=Mq_O4YljyEVLtU6HoXfKoQcczIEwHG0G6';
 
     fetch(feedUrl)
-      .then(response => response.text())
-      .then(str => {
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(str, "application/xml");
-
-        const items = xml.querySelectorAll("item");
-        const container = document.getElementById('rss-feed');
-        container.innerHTML = "";
-
-        if (items.length === 0) {
-          container.innerHTML = "<p>No news items found.</p>";
-          return;
-        }
-
-        // Show only the latest 3 items
-        for (let i = 0; i < Math.min(3, items.length); i++) {
-          const item = items[i];
-          const title = item.querySelector("title")?.textContent || "Untitled";
-          const link = item.querySelector("link")?.textContent || "#";
-          const pubDate = new Date(item.querySelector("pubDate")?.textContent || Date.now()).toLocaleDateString();
-
-          const p = document.createElement("p");
-          p.innerHTML = `
-            <a href="${link}" target="_blank">${title}</a><br>
-            <small>${pubDate}</small>
-          `;
-          container.appendChild(p);
-        }
+      .then(response => {
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
       })
-      .catch(err => {
-        console.error("Error loading XML feed:", err);
-        document.getElementById('rss-feed').innerText = "Error loading news feed.";
+      .then(items => {
+        const container = document.getElementById('rss-feed');
+        container.innerHTML = '';
+        items.forEach(item => {
+          const div = document.createElement('div');
+          div.className = 'rss-item';
+          div.innerHTML = `
+          
+            <h3>
+    <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/287" target="_blank">
+      ${item.title}
+    </a>
+    <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+      (${new Date(item.pubDate).toLocaleDateString()})
+    </span>
+  </h3>
+  
+          `;
+          container.appendChild(div);
+        });
+      })
+      .catch(error => {
+        document.getElementById('rss-feed').innerText = 'Failed to load feed.';
+        console.error('Error fetching RSS:', error);
       });
   </script>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
