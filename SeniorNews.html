@@ -11,7 +11,7 @@
       font-size: 12px;
       font-weight: 300;
       width: 100%;
-      height: auto;
+      height: auto; /* Full viewport height (VH)*/
       display: flex;
       flex-direction: column;
     }
@@ -24,8 +24,8 @@
     }
 
     #rss-feed {
-      flex: 1;
-      overflow-y: auto;
+      flex: 1; /* Take up remaining space */
+      overflow-y: auto; /* Scroll if content overflows */
       padding: 10px;
     }
 
@@ -67,20 +67,35 @@
           const div = document.createElement('div');
           div.className = 'rss-item';
           div.innerHTML = `
+          
             <h3>
-              <a href="${item.link}" target="_blank">${item.title}</a>
-              <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
-                (${new Date(item.pubDate).toLocaleDateString()})
-              </span>
-            </h3>
+    <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284" target="_blank">
+      ${item.title}
+    </a>
+    <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+      (${new Date(item.pubDate).toLocaleDateString()})
+    </span>
+  </h3>
+  
           `;
           container.appendChild(div);
         });
       })
       .catch(error => {
-        document.getElementById('rss-feed').innerText = 'No Senior School News.';
+        document.getElementById('rss-feed').innerText = 'Failed to load feed.';
         console.error('Error fetching RSS:', error);
       });
   </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
