@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en"><head>
   <meta charset="UTF-8">
   <title>RSS Feed Widget</title>
   <style>
@@ -11,7 +9,7 @@
       font-size: 12px;
       font-weight: 300;
       width: 100%;
-      height: auto; /* Full viewport height (VH)*/
+      height: auto;
       display: flex;
       flex-direction: column;
     }
@@ -24,8 +22,8 @@
     }
 
     #rss-feed {
-      flex: 1; /* Take up remaining space */
-      overflow-y: auto; /* Scroll if content overflows */
+      flex: 1;
+      overflow-y: auto;
       padding: 10px;
     }
 
@@ -46,14 +44,28 @@
       color: #555;
     }
   </style>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&amp;display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <div id="rss-feed">Loading feed...</div>
+  <div id="rss-feed"><div class="rss-item">
+            <h3>
+              <a href="null" target="_blank">Presentation for "Registration Day" (Years 10-13)</a>
+              <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+                (01/01/1970)
+              </span>
+            </h3>
+          </div><div class="rss-item">
+            <h3>
+              <a href="null" target="_blank">Presentation for "Registration Day 20/08/25" (Years 7-9)</a>
+              <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+                (01/01/1970)
+              </span>
+            </h3>
+          </div></div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi8UyEf9puwQK_n62veGCcycZdMPN2vAe0NIx6O9Z_4ZL2nudRF1HgUqn-pWLnQOGlJcwMcR4ZPRMeafdMIXuStdP1PsTELJsjh9Zf2Y6ZVsD-dFhNEL0QgsPjx_gcxzRK_KR04YqAKLOxCOS3_u726SUET8oLQVRpZLKsNP8ZEWE3qTfrmG6Z-IjSbDrrJNqxteEARFZCTldIr1S4xDb3_KX6EZn0gS3_kc244l40Dum1MDcg-11j81JCJbfZihzErMqbz63Y7N0eu42a8b_7VJgxDB7RGqPcp0klp&lib=Mq_O4YljyEVLtU6HoXfKoQcczIEwHG0G6';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLj6b9ZC081BQkAesUBW1gjjr9ogCzpwWct792YjGMoQK31Gk0XMf1qOlJqip9BOw2S-niIvLxvHh6O6T9mMTHMJuNaWs7qTBiB4g-Yn4Z3MJoMRy0eoKSgnsHAZsEZrtbbJhaJa02WzC7qns0HKkao5UZ5mzs6wkbDQcxHvxWkFFHOZJvL_YzbenguIvtninNh-vD3TPvHcZfW0LGybgL7U8KvXRBAHB78UNMuqrwrCb68Lbol6-wmtGfwUQQAvcRWsmKC8YcOVxMqgSWG4aHKRxTY2yQ&lib=Ms5gNQsySATORVaDn-PTHatucTm4bx3Zi';
 
     fetch(feedUrl)
       .then(response => {
@@ -67,33 +79,21 @@
           const div = document.createElement('div');
           div.className = 'rss-item';
           div.innerHTML = `
-          
             <h3>
-    <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/287" target="_blank">
-      ${item.title}
-    </a>
-    <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
-      (${new Date(item.pubDate).toLocaleDateString()})
-    </span>
-  </h3>
-  
+              <a href="${item.link}" target="_blank">${item.title}</a>
+              <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+                (${new Date(item.pubDate).toLocaleDateString()})
+              </span>
+            </h3>
           `;
           container.appendChild(div);
         });
       })
       .catch(error => {
-        document.getElementById('rss-feed').innerText = 'Failed to load feed.';
+        document.getElementById('rss-feed').innerText = 'No Senior School News.';
         console.error('Error fetching RSS:', error);
       });
   </script>
-</body>
-</html>
 
 
-
-
-
-
-
-
-
+</body></html>
