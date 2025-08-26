@@ -33,6 +33,7 @@
     .rss-item {
       border-bottom: 1px solid #ddd;
       padding: 5px 0;
+      margin-bottom: 15px;
     }
 
     .rss-item h3 {
@@ -45,7 +46,6 @@
     .rss-item p {
       margin: 5px 0;
       color: #555;
-      margin-bottom: 15px;
     }
 
     /* 📱 Mobile styles */
@@ -69,14 +69,17 @@
 
       .rss-item h3 {
         font-size: 12px;
+        line-height: 15px;
       }
 
       .rss-item p {
         margin: 3px 0;
+        line-height: 15px;
       }
 
       .rss-item h3 span {
         font-size: 1em;
+        line-height: 15px;
       }
     }
   </style>
@@ -87,7 +90,7 @@
   <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiwr7AHuSgIhe3mxk-gjRrUQXVtiz-FuBmihVD2G8JKL_QGHgU8ow4zPj325V4C1G-Wwv7Wc8-U-AIgV-GtdaSFuQMhc12MqiFQfVAqNSG6APgFTkQECR3QNzJNw-ZArVU1_rSWDuBRSCSqP0Um56oGUxdoUT5gO0IhtdOdQzq_cxqPLgkjgtUVdO5r64toJzIv8YLKQgVuxQ8GfdnRbaeasRlInzBs77Cs1joR6JWxe8uWgPb8KsrehAIKrMiumzm6fwTSsUHP4CxrtNk2yvNCpltwLnVjJi8ziUV7&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiZ4j8XatsRhL0JIb7S_BxntiQUzNFKN_zBK1fLHnAFKGPrKbne9fPWrWGpThvOgwZ2YPXFXGHiOB1lVjGxSXDlz4YhwqKkoBfpQAAxOarSFDw10G4J9kTVkij_6izBOXKocnHwYWvEAonBEv1u3q3EJSebIcFCL4hszOMw__Te0yghzIFxDOez7pNTy5-SGiBI2XPVCXOas1DiMJx91cPsofIwYm4CkK9N08Dc-gAhXWnVLgBlHNZDNfaWvgfiNC2Jr1TdC-wanpZuICHX8WgJkfAuqtZ6dRKyp2BN&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6';
 
     fetch(feedUrl)
       .then(response => {
@@ -108,6 +111,7 @@
               <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
                 (${new Date(item.pubDate).toLocaleDateString()})
               </span>
+              <a></a>
             </h3>
           `;
           container.appendChild(div);
@@ -120,6 +124,5 @@
   </script>
 </body>
 </html>
-
 
 
