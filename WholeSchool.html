@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <title>RSS Feed Widget</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Lato', sans-serif;
+      font-size: 12px;
       font-weight: 300;
       width: 100%;
       height: auto;
@@ -20,6 +20,7 @@
     h1 {
       text-align: center;
       color: #333;
+      font-size: 12px;
       font-weight: 300;
     }
 
@@ -35,8 +36,8 @@
     }
 
     .rss-item h3 {
-    
       margin: 0;
+      font-size: 12px;
       color: #0077cc;
       font-weight: 300;
     }
@@ -46,30 +47,10 @@
       color: #555;
     }
 
-    /* 💻 Desktop styles */
-    @media (min-width: 601px) {
-      html, body {
-        font-size: 14px;
-      }
-
-      h1 {
-        font-size: 14px;
-      }
-
-      .rss-item h3 {
-        font-size: 14px;
-      }
-
-      .rss-item h3 span {
-          font-size: 14px;
-   
-      }
-    }
-
     /* 📱 Mobile styles */
     @media (max-width: 600px) {
       html, body {
-        font-size: 11px;
+        font-size: 10px;
       }
 
       h1 {
@@ -97,10 +78,10 @@
       }
     }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <h1>Wholeschool News</h1>
   <div id="rss-feed">Loading feed...</div>
 
   <script>
@@ -114,12 +95,6 @@
       .then(items => {
         const container = document.getElementById('rss-feed');
         container.innerHTML = '';
-
-        if (!items || items.length === 0) {
-          container.innerText = 'No Wholeschool news';
-          return;
-        }
-
         items.forEach(item => {
           const div = document.createElement('div');
           div.className = 'rss-item';
@@ -143,4 +118,3 @@
   </script>
 </body>
 </html>
-
