@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Lato', sans-serif;
-      font-size: 14px;
+      font-size:12px;
       font-weight: 300;
       width: 100%;
       height: auto;
@@ -33,6 +33,7 @@
     .rss-item {
       border-bottom: 1px solid #ddd;
       padding: 5px 0;
+      margin-bottom: 15px;
     }
 
     .rss-item h3 {
@@ -50,11 +51,11 @@
     /* 📱 Mobile styles */
     @media (max-width: 600px) {
       html, body {
-        font-size: 11px;
+        font-size: 12px;
       }
 
       h1 {
-        font-size: 10px;
+        font-size: 12px;
       }
 
       #rss-feed {
@@ -63,18 +64,22 @@
 
       .rss-item {
         padding: 3px 0;
+        margin-bottom: 15px;
       }
 
       .rss-item h3 {
-        font-size: 10px;
+        font-size: 12px;
+        line-height: 15px;
       }
 
       .rss-item p {
         margin: 3px 0;
+        line-height: 15px;
       }
 
       .rss-item h3 span {
-        font-size: 0.8em;
+        font-size: 1em;
+        line-height: 15px;
       }
     }
   </style>
@@ -85,7 +90,7 @@
   <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLibNsLTHxJ-JFj5pKqXPSr1xZ6TblJmxdKUDEZd8UPB9zIPfBwnw2N3EcEKEpJz8PlO4pm_Cpu2ts4pdgbzM3oFytzn3NW187qyCxDPCf9m3XZWeppiMjGJsfy5agfT--WiT_lK7JDs7AxcnnokgOTE5IysVfwJj8JTaY7UR22LEuVHKAe_IDVr_0eaMT4w0e9n1qY1v-c92_8ZtRJA80xMHiejmhzV-ijzYNA0sIZNyd70YeQ5RryUxZIkmRxJFPZjLlfYLSzGUn51-x7v9yHBT5QjsA&lib=MpvUY-OZDL0L7xkeT9cAcpducTm4bx3Zi';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjx5KZINlIfK6guSlFk75eyPdkDmOghg2zaep-TV_jmhbF2ENoONbi-yBqQzvTWBlAnrO_q1To-mSBCtHBFSvKgc7t8D6avV0jqSNZOPklefk6irNQfsDiLD4p9W-R_VFjDaxRL3GjHE6HcR5BcjvEU1WiYP7WXcYgBa33XvYEYcaVkhIOjkulkj45st5dt8se_pDrQnovwBuDyInazN6pMUe0Kad-EoHpKwwGZMZ9mijndqmMpC0IrSnojrLsJ0qq6U8uOc_CZQ1krGbWDlV4YnmH9dw&lib=MpvUY-OZDL0L7xkeT9cAcpducTm4bx3Zi';
 
     fetch(feedUrl)
       .then(response => {
@@ -106,6 +111,7 @@
               <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
                 (${new Date(item.pubDate).toLocaleDateString()})
               </span>
+              <a></a>
             </h3>
           `;
           container.appendChild(div);
@@ -118,3 +124,4 @@
   </script>
 </body>
 </html>
+
