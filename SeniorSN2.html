@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>RSS Feed Widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Lato', sans-serif;
-      font-size: 12px;
+      font-size:12px;
       font-weight: 300;
       width: 100%;
-      height: auto; /* Full viewport height (VH)*/
+      height: auto;
       display: flex;
       flex-direction: column;
     }
@@ -24,14 +25,15 @@
     }
 
     #rss-feed {
-      flex: 1; /* Take up remaining space */
-      overflow-y: auto; /* Scroll if content overflows */
+      flex: 1;
+      overflow-y: auto;
       padding: 10px;
     }
 
     .rss-item {
       border-bottom: 1px solid #ddd;
       padding: 5px 0;
+      margin-bottom: 12px;
     }
 
     .rss-item h3 {
@@ -45,6 +47,41 @@
       margin: 5px 0;
       color: #555;
     }
+
+    /* 📱 Mobile styles */
+    @media (max-width: 600px) {
+      html, body {
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: 12px;
+      }
+
+      #rss-feed {
+        padding: 5px;
+      }
+
+      .rss-item {
+        padding: 3px 0;
+        margin-bottom: 12px;
+      }
+
+      .rss-item h3 {
+        font-size: 12px;
+        line-height: 15px;
+      }
+
+      .rss-item p {
+        margin: 3px 0;
+        line-height: 15px;
+      }
+
+      .rss-item h3 span {
+        font-size: 1em;
+        line-height: 15px;
+      }
+    }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
@@ -53,7 +90,7 @@
   <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi8UyEf9puwQK_n62veGCcycZdMPN2vAe0NIx6O9Z_4ZL2nudRF1HgUqn-pWLnQOGlJcwMcR4ZPRMeafdMIXuStdP1PsTELJsjh9Zf2Y6ZVsD-dFhNEL0QgsPjx_gcxzRK_KR04YqAKLOxCOS3_u726SUET8oLQVRpZLKsNP8ZEWE3qTfrmG6Z-IjSbDrrJNqxteEARFZCTldIr1S4xDb3_KX6EZn0gS3_kc244l40Dum1MDcg-11j81JCJbfZihzErMqbz63Y7N0eu42a8b_7VJgxDB7RGqPcp0klp&lib=Mq_O4YljyEVLtU6HoXfKoQcczIEwHG0G6';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjx3mTEC0Lv572g71aibC7sBHt-JadfAs6GLvnhU3XTZXt6QyMBxP922httMQrnhvlgdgLNr3FPH0kZRK-zF8zT14EXY_8j3orXJXxeBx6ffsOH9wuTIZuZ_BU-Xa91gVPNhlbyOZn1vwBUkTQYgTD3npcgKheclS05k0nvRqOfSfXJat9Gqbdy0pNXJlh1X1lj3-kINIvCnD5BGDxsjbtbMSfwdF_-fNm81wtJYpTJULtksgN4zw2-idLdzebXRhVQr0WJxfBj9OaWrXj_OBZqcFKugg&lib=Ms5gNQsySATORVaDn-PTHatucTm4bx3Zi';
 
     fetch(feedUrl)
       .then(response => {
@@ -67,16 +104,15 @@
           const div = document.createElement('div');
           div.className = 'rss-item';
           div.innerHTML = `
-          
             <h3>
-    <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/287" target="_blank">
-      ${item.title}
-    </a>
-    <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
-      (${new Date(item.pubDate).toLocaleDateString()})
-    </span>
-  </h3>
-  
+              <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284" target="_blank">
+                ${item.title}
+              </a>
+              <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
+                (${new Date(item.pubDate).toLocaleDateString()})
+              </span>
+              <a></a>
+            </h3>
           `;
           container.appendChild(div);
         });
@@ -88,17 +124,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
