@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Lato', sans-serif;
-      font-size:12px;
+      font-size: 12px;
       font-weight: 300;
       width: 100%;
       height: auto;
@@ -48,7 +48,6 @@
       color: #555;
     }
 
-    /* 📱 Mobile styles */
     @media (max-width: 600px) {
       html, body {
         font-size: 12px;
@@ -90,7 +89,7 @@
   <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjx3mTEC0Lv572g71aibC7sBHt-JadfAs6GLvnhU3XTZXt6QyMBxP922httMQrnhvlgdgLNr3FPH0kZRK-zF8zT14EXY_8j3orXJXxeBx6ffsOH9wuTIZuZ_BU-Xa91gVPNhlbyOZn1vwBUkTQYgTD3npcgKheclS05k0nvRqOfSfXJat9Gqbdy0pNXJlh1X1lj3-kINIvCnD5BGDxsjbtbMSfwdF_-fNm81wtJYpTJULtksgN4zw2-idLdzebXRhVQr0WJxfBj9OaWrXj_OBZqcFKugg&lib=Ms5gNQsySATORVaDn-PTHatucTm4bx3Zi';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjI10v8LauN3dz68F5Lbwg-ITkRw_O4A_7lHJNqOZoalSdxoTq96L9wJbj_8E1MBiGLJh-aHUdsRL_1FgKHy6kdJZafRzvOr9cd8q0Gq9YaobRowXMfBbmeiYdfSSMC-E7zILeoLSaEIzl8nsONYmanaDo_Rs_hm1srW0PTCTyWOKjk-M-K9lNgWXPCy7SjsIkwDJlV0k2Q6ceoPVf8T5YlEsrYFWc-nIqAVUBXyG2S0DJDXd7zxc37xD-wYVRPK0JyMabjsyQGp2Oa60WfUdPdzFM4tQ&lib=Ms5gNQsySATORVaDn-PTHatucTm4bx3Zi';
 
     fetch(feedUrl)
       .then(response => {
@@ -100,6 +99,12 @@
       .then(items => {
         const container = document.getElementById('rss-feed');
         container.innerHTML = '';
+
+        if (!items || items.length === 0) {
+          container.innerText = 'No Senior School News';
+          return;
+        }
+
         items.forEach(item => {
           const div = document.createElement('div');
           div.className = 'rss-item';
@@ -111,7 +116,6 @@
               <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
                 (${new Date(item.pubDate).toLocaleDateString()})
               </span>
-              <a></a>
             </h3>
           `;
           container.appendChild(div);
