@@ -9,7 +9,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Lato', sans-serif;
-      font-size:12px;
+      font-size: 12px;
       font-weight: 300;
       width: 100%;
       height: auto;
@@ -48,7 +48,6 @@
       color: #555;
     }
 
-    /* 📱 Mobile styles */
     @media (max-width: 600px) {
       html, body {
         font-size: 12px;
@@ -90,7 +89,7 @@
   <div id="rss-feed">Loading feed...</div>
 
   <script>
-    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiZ4j8XatsRhL0JIb7S_BxntiQUzNFKN_zBK1fLHnAFKGPrKbne9fPWrWGpThvOgwZ2YPXFXGHiOB1lVjGxSXDlz4YhwqKkoBfpQAAxOarSFDw10G4J9kTVkij_6izBOXKocnHwYWvEAonBEv1u3q3EJSebIcFCL4hszOMw__Te0yghzIFxDOez7pNTy5-SGiBI2XPVCXOas1DiMJx91cPsofIwYm4CkK9N08Dc-gAhXWnVLgBlHNZDNfaWvgfiNC2Jr1TdC-wanpZuICHX8WgJkfAuqtZ6dRKyp2BN&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6';
+    const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLj0UDNWrSlPPjDDTHELVacs030gJUgStu2Hs0q5zzXZrOoKwU7lbrxmFV4IroExm9fepVyZO9RSw3WehgDscCRMpoIFv-BvxkVqQRFvIH5_dClLWW9LLsxGJTZJAj8iwxET_ToMoQSidDVUsevnQoqpUJopFaMTbsddEuO2pysVcyrWERhtGV62Grd985D-UHLzzS8nAY8MJaWntgJEqt330gDOxNGtBjI-HHlAjHdWGUQYI-eqCR-ME12ic5j_fHBkedXTIxStnl7cscdm4ZlJzt6G0qh3zsYC4dvp&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6';
 
     fetch(feedUrl)
       .then(response => {
@@ -100,6 +99,12 @@
       .then(items => {
         const container = document.getElementById('rss-feed');
         container.innerHTML = '';
+
+        if (!items || items.length === 0) {
+          container.innerText = 'No Whole School News';
+          return;
+        }
+
         items.forEach(item => {
           const div = document.createElement('div');
           div.className = 'rss-item';
@@ -111,7 +116,6 @@
               <span style="margin-left: 10px; font-weight: normal; font-size: 0.9em;">
                 (${new Date(item.pubDate).toLocaleDateString()})
               </span>
-              <a></a>
             </h3>
           `;
           container.appendChild(div);
@@ -124,6 +128,3 @@
   </script>
 </body>
 </html>
-
-
-
