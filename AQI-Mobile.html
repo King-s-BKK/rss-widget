@@ -1,142 +1,9 @@
-
-
-
-
-Claim offer
-for this "<div class="desktop-content" style="border:none;">
-    <p>
-        
-</p>
-    <p>
-        <img src="https://king-s-bkk.github.io/rss-widget/1.png" alt="King's Bangkok" style="display:block;width:100%;height:auto;">
-    </p>
-    <div style="position:absolute; left:50%; bottom:5%; transform:translateX(-50%); z-index:10;">
-        <figure>
-            <div class="embed-content">
-                <iframe src="https://king-s-bkk.github.io/rss-widget/AQI2.html"  style="display:block; width:737px; height:164px; border:none; overflow:hidden; background:transparent;"></iframe>
-            </div>
-        </figure>
-    </div>
-    <p>
-
-    </p>
-</div>
-<div class="mobile-content" style="max-width:500px; margin:auto;">
-    <p>
-        <img src="https://king-s-bkk.github.io/rss-widget/1.png" alt="King's Bangkok" style="display:block;width:100%;height:auto;">
-    </p>
-    <div style="position:absolute; left:50%; bottom:0%; transform:translateX(-50%); z-index:10;">
-        <figure>
-            <div class="embed-content">
-                <iframe src="https://king-s-bkk.github.io/rss-widget/AQI2.html" width="50%" height="auto" style="display:block; width:auto; height:auto; border:none; overflow:hidden; background:transparent;"></iframe>
-            </div>
-        </figure>
-    </div>
-</div>" adjust aqi widge for mobile content so it auto size to match device , rewrite html
-
-The main issue is that the mobile widget is absolutely positioned, has fixed iframe dimensions, and the parent container isn't positioned relatively. For mobile, make the iframe width responsive (100%) and constrain it with a max width.
-
-Here's a cleaner responsive version:
-
-<style>
-.desktop-content {
-    position: relative;
-}
-
-.desktop-widget {
-    position: absolute;
-    left: 50%;
-    bottom: 5%;
-    transform: translateX(-50%);
-    z-index: 10;
-}
-
-.desktop-widget iframe {
-    width: 737px;
-    height: 164px;
-    border: none;
-    background: transparent;
-}
-
-.mobile-content {
-    position: relative;
-    max-width: 500px;
-    margin: auto;
-}
-
-.mobile-widget {
-    position: absolute;
-    left: 50%;
-    bottom: 2%;
-    transform: translateX(-50%);
-    width: 90%;
-    max-width: 400px;
-    z-index: 10;
-}
-
-.mobile-widget iframe {
-    width: 100%;
-    height: 164px;
-    border: none;
-    background: transparent;
-    display: block;
-}
-</style>
-
-<!-- Desktop -->
-<div class="desktop-content">
-    <img
-        src="https://king-s-bkk.github.io/rss-widget/1.png"
-        alt="King's Bangkok"
-        style="display:block;width:100%;height:auto;"
-    >
-
-    <div class="desktop-widget">
-        <iframe
-            src="https://king-s-bkk.github.io/rss-widget/AQI2.html"
-            scrolling="no">
-        </iframe>
-    </div>
-</div>
-
-<!-- Mobile -->
-<div class="mobile-content">
-    <img
-        src="https://king-s-bkk.github.io/rss-widget/1.png"
-        alt="King's Bangkok"
-        style="display:block;width:100%;height:auto;"
-    >
-
-    <div class="mobile-widget">
-        <iframe
-            src="https://king-s-bkk.github.io/rss-widget/AQI2.html"
-            scrolling="no">
-        </iframe>
-    </div>
-</div>
-
-If the AQI widget itself is responsive, you can make it fully device-width by changing:
-
-.mobile-widget {
-    width: calc(100% - 20px);
-    max-width: none;
-}
-and
-
-.mobile-widget iframe {
-    width: 100%;
-    height: auto;
-    min-height: 164px;
-}
-This will allow the AQI widget to automatically expand to nearly the full width of any phone screen while remaining centered.
-
-
-for this <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>AQI Widget</title>
-  <meta name="viewport" content="width=device-width, initial-scale=0.5">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     * {
       box-sizing: border-box;
@@ -172,7 +39,7 @@ for this <!DOCTYPE html>
       text-align: center;
       transform-origin: top center;
           
-        transform: scale(1);
+        transform: scale(0.5);
       
     }
 
@@ -181,7 +48,7 @@ for this <!DOCTYPE html>
       margin: 0 auto;
     }
 
-    @media (max-width: 150px) {
+    @media (max-width: 600px) {
       .widget-container {
         padding: 10px;
       }
@@ -200,91 +67,4 @@ for this <!DOCTYPE html>
   </div>
   <script type="text/javascript" src="https://widget.iqair.com/script/widget_v3.0.js"></script>
 </body>
-</html>" adjust so the size of widget is small and fit mobile screen (maximum width is less than 120 px 
-
-If you want the IQAir widget to stay under 120px wide on mobile, the safest approach is to scale the widget down and constrain its container width.
-
-Try this version:
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AQI Widget</title>
-
-<style>
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    --aqi-green-300: #8DBAED !important;
-    --aqi-green-500: #a9c8eb !important;
-}
-
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background: transparent !important;
-}
-
-.widget-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent !important;
-}
-
-/* Limit overall widget width */
-.airvisual-wrapper {
-    width: 120px;
-    max-width: 120px;
-    transform-origin: top center;
-    transform: scale(0.55);
-}
-
-/* Center widget */
-[name="airvisual_widget"] {
-    display: block;
-}
-
-/* Extra-small screens */
-@media (max-width: 480px) {
-    .airvisual-wrapper {
-        width: 100px;
-        max-width: 100px;
-        transform: scale(0.5);
-    }
-}
-</style>
-</head>
-
-<body>
-<div class="widget-container">
-    <div class="airvisual-wrapper">
-        <div name="airvisual_widget" key="SuS8oc7aRdnzpG52A"></div>
-    </div>
-</div>
-
-<script src="https://widget.iqair.com/script/widget_v3.0.js"></script>
-</body>
 </html>
-If the widget still appears too wide, increase the scaling reduction:
-
-.airvisual-wrapper {
-    width: 120px;
-    transform: scale(0.45);
-}
-or even:
-
-.airvisual-wrapper {
-    width: 120px;
-    transform: scale(0.4);
-}
-because IQAir's widget has a fixed internal width and must usually be shrunk using transform: scale() rather than CSS width alone.
-
-
