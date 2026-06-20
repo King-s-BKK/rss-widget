@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AQI Widget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+      
+    }
+:root {
+        --aqi-green-300: #8DBAED !important;
+  
+       --aqi-green-500:  #a9c8eb !important;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 50%;
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent !important;
+    }
+
+    .widget-container {
+      background-color: transparent !important;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+
+    .airvisual-wrapper {
+      text-align: center;
+      transform-origin: top center;
+          
+        transform: scale(1);
+      
+    }
+
+    [name="airvisual_widget"] {
+      display: inline-block;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .widget-container {
+        padding: 10px;
+      }
+
+      .airvisual-wrapper {
+        transform: scale(0.9);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="widget-container">
+    <div class="airvisual-wrapper">
+      <div name="airvisual_widget" key="SuS8oc7aRdnzpG52A"></div>
+    </div>
+  </div>
+  <script type="text/javascript" src="https://widget.iqair.com/script/widget_v3.0.js"></script>
+</body>
+</html>
