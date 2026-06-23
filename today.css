@@ -1,0 +1,7 @@
+.timetable-day {
+    display:none !important;
+}
+
+.timetable-day[data-date="2026-06-23"] {
+    display:block !important;
+}
