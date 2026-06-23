@@ -1,47 +1,44 @@
 name: Update Date CSS
 
+
 on:
-schedule:
-- cron: '5 17 * * *'
-workflow_dispatch:
+  schedule:
+    - cron: '5 17 * * *'
+  workflow_dispatch:
 
 permissions:
-contents: write
+  contents: write
 
 jobs:
-update:
-runs-on: ubuntu-latest
+  update:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-steps:
-  - name: Checkout repository
-    uses: actions/checkout@v4
+      - name: Generate CSS
+        run: |
+          TODAY=$(TZ=Asia/Bangkok date -d '+1 day' +%F)
 
-  - name: Generate CSS for tomorrow
-    run: |
-      TODAY=$(TZ=Asia/Bangkok date -d "+1 day" +%F)
+          cat > today.css << EOF
+          .timetable-day {
+              display: none !important;
+          }
 
-      cat > today.css <<EOF
-      .timetable-day {
-          display: none !important;
-      }
+          .timetable-day[data-date="$TODAY"] {
+              display: block !important;
+          }
+          EOF
 
-      .timetable-day[data-date="$TODAY"] {
-          display: block !important;
-      }
-      EOF
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
 
-  - name: Commit and push changes
-    run: |
-      TODAY=$(TZ=Asia/Bangkok date -d "+1 day" +%F)
+          git add today.css
 
-      git config --global user.name "github-actions"
-      git config --global user.email "github-actions@github.com"
-
-      git add today.css
-
-      if ! git diff --cached --quiet; then
-        git commit -m "Update date to $TODAY"
-        git push
-      fi
-
+          git diff --cached --quiet || (
+            git commit -m "Update date to $TODAY"
+            git push
+          )
