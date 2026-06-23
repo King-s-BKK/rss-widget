@@ -42,4 +42,4 @@ steps:
         git commit -m "Update date to $TODAY"
         git push
       )
-```
+
