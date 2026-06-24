@@ -19,7 +19,7 @@ jobs:
 
       - name: Generate CSS
         run: |
-          TODAY=$(TZ=Asia/Bangkok date -d '+1 day' +%F)
+          TODAY=$(TZ=Asia/Bangkok date +%F)
 
           cat > today.css << EOF
           .timetable-day {
