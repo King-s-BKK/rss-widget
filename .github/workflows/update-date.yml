@@ -19,29 +19,25 @@ jobs:
       - name: Generate CSS
         run: |
           TODAY=$(TZ=Asia/Bangkok date +%F)
+
           cat > today.css << EOF
           .timetable-day {
               display: none !important;
           }
+
           .timetable-day[data-date="$TODAY"] {
               display: block !important;
           }
           EOF
 
-      - name: Cache Bust HTML Reference
-        run: |
-          # Replaces today.css or today.css?v=anything with today.css?v=RUN_ID
-          sed -i -E "s/today\.css(\?v=[a-zA-Z0-9_\-]+)?/today.css?v=${{ github.run_id }}/g" index.html
-
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          
-          # Add both the new CSS and the updated HTML file
-          git add today.css index.html
-          
+
+          git add today.css
+
           git diff --cached --quiet || (
-            git commit -m "Update date to $TODAY and cache bust"
+            git commit -m "Update date to $TODAY"
             git push
           )
