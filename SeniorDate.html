@@ -29,13 +29,13 @@
 
     .rss-item {
       border-bottom: 1px solid #ddd;
-      padding: 6px 0;
-      margin-bottom: 8px;
+      padding: 5px 0;
+      margin-bottom: 12px;
     }
 
     .rss-row {
       display: grid;
-      grid-template-columns: 1fr 95px;
+      grid-template-columns: 1fr 90px;
       gap: 10px;
       align-items: start;
     }
@@ -62,13 +62,17 @@
     }
 
     @media (max-width: 600px) {
+      html, body {
+        font-size: 12px;
+      }
+
       #rss-feed {
         padding: 5px;
       }
 
       .rss-item {
         padding: 3px 0;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
       }
 
       .rss-row {
@@ -92,14 +96,11 @@
 <div id="rss-feed">Loading feed...</div>
 
 <script>
-  const feedUrl =
-    'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjI10v8LauN3dz68F5Lbwg-ITkRw_O4A_7lHJNqOZoalSdxoTq96L9wJbj_8E1MBiGLJh-aHUdsRL_1FgKHy6kdJZafRzvOr9cd8q0Gq9YaobRowXMfBbmeiYdfSSMC-E7zILeoLSaEIzl8nsONYmanaDo_Rs_hm1srW0PTCTyWOKjk-M-K9lNgWXPCy7SjsIkwDJlV0k2Q6ceoPVf8T5YlEsrYFWc-nIqAVUBXyG2S0DJDXd7zxc37xD-wYVRPK0JyMabjsyQGp2Oa60WfUdPdzFM4tQ&lib=Ms5gNQsySATORVaDn-PTHatucTm4bx3Zi';
+  const feedUrl = 'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLjI10v8LauN3dz68F5Lbwg-ITkRw_O4A_7lHJNqOZoalSdxoTq96L9wJbj_8E1MBiGLJh-aHUdsRL_1FgKHy6kdJZafRzvOr9cd8q0Gq9YaobRowXMfBbmeiYdfSSMC-E7zILeoLSaEIzl8nsONYmanaDo_Rs_hm1srW0PTCTyWOKjk-M-K9lNgWXPCy7SjsIkwDJlV0k2Q6ceoPVf8T5YlEsrYFWc-nIqAVUBXyG2S0DJDXd7zxc37xD-wYVRPK0JyMabjsyQGp2Oa60WfUdPdzFM4tQ&lib=Ms5gNQsySATORVaDn-PTHatucTm4bx3Zi';
 
   fetch(feedUrl)
     .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
+      if (!response.ok) throw new Error("Network response was not ok");
       return response.json();
     })
     .then(items => {
@@ -138,9 +139,8 @@
       });
     })
     .catch(error => {
+      document.getElementById('rss-feed').innerText = 'Failed to load feed.';
       console.error('Error fetching RSS:', error);
-      document.getElementById('rss-feed').innerText =
-        'Failed to load feed.';
     });
 </script>
 
