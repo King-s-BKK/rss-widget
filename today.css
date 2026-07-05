@@ -1,7 +1,8 @@
-.timetable-day {
-    display: none !important;
-}
+ .timetable-day {
+     display: none !important;
+ }
 
-.timetable-day[data-date="2026-07-06"] {
-    display: block !important;
-}
+ .timetable-day[data-date="2026-06-15"] {
+     display: block !important;
+ }
+ EOF
