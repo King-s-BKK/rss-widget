@@ -1,0 +1,8 @@
+ .timetable-day {
+     display: none !important;
+ }
+
+ .timetable-day[data-date="2026-07-17"] {
+     display: block !important;
+ }
+ EOF
