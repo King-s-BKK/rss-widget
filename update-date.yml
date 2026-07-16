@@ -2,8 +2,7 @@ name: Update Date CSS
 
 on:
   schedule:
-   
-    - cron: '10 12 * * *'
+    - cron: '5 17 * * *'
   workflow_dispatch:
 
 permissions:
@@ -17,16 +16,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set timezone to Bangkok
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y tzdata
-          sudo ln -fs /usr/share/zoneinfo/Asia/Bangkok /etc/localtime
-          sudo dpkg-reconfigure -f noninteractive tzdata
-
       - name: Generate CSS
         run: |
-          TODAY=$(date +%F)
+          TODAY=$(TZ=Asia/Bangkok date +%F)
 
           cat > today.css << EOF
           .timetable-day {
@@ -44,6 +36,7 @@ jobs:
           git config user.email "github-actions@github.com"
 
           git add today.css
+
           git diff --cached --quiet || (
             git commit -m "Update date to $TODAY"
             git push
