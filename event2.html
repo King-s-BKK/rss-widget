@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Calendar Preview</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 10px;
+      font-family: 'Arial', sans-serif;
+      font-size: 13px;
+      background: #fff;
+      color: #333;
+    }
+
+    h1 {
+      text-align: center;
+      color: #8DBAED; /* calendar header color */
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .calendar-feed {
+      margin-bottom: 20px;
+    }
+
+    .calendar-item {
+      border-bottom: 1px solid #ddd;
+      padding: 6px 0;
+    }
+
+    .calendar-item h3 {
+      margin: 0;
+      font-size: 13px;
+      color: #8DBAED; /* calendar font color */
+      font-weight: bold;
+    }
+
+    .calendar-item span {
+      margin-left: 10px;
+      font-weight: normal;
+      font-size: 0.9em;
+      color: #555;
+    }
+
+    .footer-link {
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    .footer-link a {
+      color: #8DBAED;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>School Calendar</h1>
+
+  <div id="calendar-container">
+    Loading calendars…
+  </div>
+
+  <script>
+    // Calendar preview URLs
+    const calendarUrls = [
+      "https://kingsbangkok.isamshosting.cloud/modules/calendarmanager/settings/addcalendarpreview.asp?id=12",
+      "https://kingsbangkok.isamshosting.cloud/modules/calendarmanager/settings/addcalendarpreview.asp?id=10",
+      "https://kingsbangkok.isamshosting.cloud/modules/calendarmanager/settings/addcalendarpreview.asp?id=11",
+      "https://kingsbangkok.isamshosting.cloud/modules/calendarmanager/settings/addcalendarpreview.asp?id=14"
+    ];
+
+    const container = document.getElementById("calendar-container");
+
+    // Fetch each calendar preview
+    Promise.all(calendarUrls.map(url =>
+      fetch(url).then(res => res.text())
+    ))
+    .then(results => {
+      container.innerHTML = "";
+      results.forEach((html, idx) => {
+        const div = document.createElement("div");
+        div.className = "calendar-feed";
+        div.innerHTML = html;
+
+        // Disable all links inside this feed
+        div.querySelectorAll("a").forEach(link => {
+          link.removeAttribute("href");
+          link.style.cursor = "default";
+          link.style.color = "#8DBAED"; // keep calendar blue
+        });
+
+        container.appendChild(div);
+      });
+
+      // Add footer "View All" link (still active)
+      const footer = document.createElement("div");
+      footer.className = "footer-link";
+      footer.innerHTML = `<a href="https://kingsbangkok.isamshosting.cloud/modules/calendarmanager/" target="_blank">View All Calendars</a>`;
+      container.appendChild(footer);
+    })
+    .catch(err => {
+      container.innerText = "Failed to load calendars.";
+      console.error("Error fetching calendars:", err);
+    });
+  </script>
+</body>
+</html>
