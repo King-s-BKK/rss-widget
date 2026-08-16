@@ -4,7 +4,7 @@ body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > span {
   
     text-decoration: none !important;
-    cursor: default !important;
+    cursor: none !important;
     pointer-events: none !important;
     background: transparent !important;
 }
