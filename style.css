@@ -1,11 +1,10 @@
-/* GitHub-hosted CSS override */
-
 body.sectionHomePage div.dashboard div.homepage-component.events > div > div > article > a,
 body.sectionHomePage div.dashboard div.homepage-component.events > div > div > article > span,
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > a,
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > span {
     color: red !important;
-    cursor: none !important;
+    text-decoration: none !important;
+    cursor: default !important;
     pointer-events: none !important;
-    background-color: transparent !important;
+    background: transparent !important;
 }
