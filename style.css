@@ -2,7 +2,7 @@ body.sectionHomePage div.dashboard div.homepage-component.events > div > div > a
 body.sectionHomePage div.dashboard div.homepage-component.events > div > div > article > span,
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > a,
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > span {
-    color: red !important;
+  
     text-decoration: none !important;
     cursor: default !important;
     pointer-events: none !important;
