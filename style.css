@@ -5,5 +5,7 @@ body.sectionHomePage div.dashboard div.homepage-component.events > div > div > a
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > a,
 body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > span {
     color: red !important;
+    cursor: none !important;
+    pointer-events: none !important;
     background-color: transparent !important;
 }
