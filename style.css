@@ -8,3 +8,15 @@ body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div
     pointer-events: none !important;
     background: transparent !important;
 }
+
+@media screen and (max-width: 768px) {
+    body.sectionHomePage div.dashboard div.homepage-component.events > div > div > article > a,
+    body.sectionHomePage div.dashboard div.homepage-component.events > div > div > article > span,
+    body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > a,
+    body.sectionHomePage div.dashboard div.homepage-component.eventsForMyChild > div > div > article > span {
+        text-decoration: none !important;
+        cursor: none !important;
+        pointer-events: none !important;
+        background: transparent !important;
+    }
+}
