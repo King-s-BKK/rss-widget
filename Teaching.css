@@ -365,7 +365,10 @@ body.pupilTeachers h1:before {
     background-position: center;
 }
 
-li[data-action="change-subset"][data-subset="my"] {
-    display: none !important;
+.nav-tabs li[data-subset="my"] {
+    display: none;
+}
+.nav-tabs li[data-subset="all"] {
+      display: inline-block;
 }
 </style>
