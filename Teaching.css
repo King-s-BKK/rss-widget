@@ -15,9 +15,21 @@
 
 <style>
 
+tr.alexa {
+  display: none;
+}
 
+.settings-table tbody tr:nth-child(5) {
+  display: none;
+}
 
-
+.teachers-table thead th {
+  position: relative;
+}
+.teachers-table thead th:not(:first-child):not(:last-child):not(.academic) {
+  color: transparent !important;
+  font-size: 0 !important;
+}
 
 
 /* Top navigation bar link colors */
@@ -26,6 +38,8 @@ nav ul li span {
   position: relative; /* needed if using ::before underline effect */
   color: black !important;   /* default/base color */
   transition: color 0.3s ease, font-weight 0.3s ease;
+  pointer-events: auto !important; /* re-enable hover/click, overriding the global "a { pointer-events: none }" rule below */
+  cursor: pointer !important;
 }
 
 nav ul li a:hover,
@@ -61,6 +75,8 @@ nav ul li span:hover::before {
     position: relative;
     color: white !important;   /* default/base color for mobile */
     transition: color 0.3s ease, font-weight 0.3s ease;
+    pointer-events: auto !important; /* re-enable hover/click on mobile nav too */
+    cursor: pointer !important;
   }
 
   nav ul li a:hover,
@@ -94,163 +110,17 @@ nav ul li span:hover::before {
 
 
 
-.row.d-print-none {
-    display: none !important;
+/* Hide the "Role" column in the teachers table */
+.teachers-table th.academic,
+.teachers-table td.academic {
+  display: none !important;
 }
 
-/* Expand main content to full width */
-.col-12.col-lg-9.content-wrapper.no-gutters {
-    flex: 0 0 100% !important;
-    max-width: 100% !important;
-    width: 100% !important;
-
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-
-    left: 0 !important;
-    transform: none !important;
+/* Hide the mobile-view "Role" label cell (th.head-role) */
+.teachers-table th.head-role,
+.teachers-table th.visible-xs.head-role {
+  display: none !important;
 }
-
-/* If parent row uses flexbox centering */
-.row {
-    justify-content: flex-start !important;
-}
-
-/* Remove container width restrictions */
-.container,
-.container-fluid {
-    max-width: 100% !important;
-    width: 100% !important;
-}
-
-
-
-
-
-
-#right-myChildren-1 .fa-users {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    background: url('https://king-s-bkk.github.io/rss-widget/My%20Child_s%20Details.png') center center no-repeat;
-    background-size: contain;
-    vertical-align: middle;
-}
-
-#right-myChildren-1 .fa-users::before {
-    content: none !important;
-}
-
-
-
-#right-events-0 .far.fa-calendar-alt,
-#right-events-0 .far.fa-calendar-days {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    background: url('https://king-s-bkk.github.io/rss-widget/School%20Calendar.png') center center no-repeat;
-    background-size: contain;
-    vertical-align: middle;
-}
-
-#right-events-0 .fa-calendar-alt::before,
-#right-events-0 .fa-calendar-days::before {
-    content: none !important;
-}
-
-
-
-
-#middle-content-0 i.far.fa-square-poll-horizontal,
-#middle-content-0 i.far.fa-square-poll-horizontal{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    background: url('https://king-s-bkk.github.io/rss-widget/Weather%20widget.png') center center no-repeat;
-    background-size: contain;
-    vertical-align: middle;
-}
-
-#middle-content-0 .far.fa-square-poll-horizontal::before {
-    content: none !important;
-}
-
-
-
-
-
-
-#middle-content-1 i.far.fa-square-poll-horizontal,
-#middle-content-1 i.far.fa-square-poll-horizontal{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    background: url('https://king-s-bkk.github.io/rss-widget/News%20by%20Section.png') center center no-repeat;
-    background-size: contain;
-    vertical-align: middle;
-}
-
-#middle-content-1 .far.fa-square-poll-horizontal::before {
-    content: none !important;
-}
-
-
-
-
-
-#middle-content-2 i.far.fa-square-poll-horizontal,
-#middle-content-2 i.far.fa-square-poll-horizontal{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    background: url('https://king-s-bkk.github.io/rss-widget/Other%20Platforms.png') center center no-repeat;
-    background-size: contain;
-    vertical-align: middle;
-}
-
-#middle-content-2 .far.fa-square-poll-horizontal::before {
-    content: none !important;
-}
-
-
-
-#middle-content-3 i.far.fa-square-poll-horizontal,
-#middle-content-3 i.far.fa-square-poll-horizontal{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    margin-right: 8px;
-    background: url('https://king-s-bkk.github.io/rss-widget/News%20feed.png') center center no-repeat;
-    background-size: contain;
-    vertical-align: middle;
-}
-
-#middle-content-3 .far.fa-square-poll-horizontal::before {
-    content: none !important;
-}
-
-
-
-
-
-
-
-tr.alexa {
-  display: none;
-}
-
-.settings-table tbody tr:nth-child(5) {
-  display: none;
-}
-
 
 td.show-tutorial {
   display: none;
@@ -319,6 +189,10 @@ td.show-tutorial {
   display: none;
 }
 
+.btn:not(:disabled):not(.disabled)
+{
+display:none;
+}
 
 body.studentDashboard .widget-dashboard, div.st-sidebar-container {
 
@@ -479,11 +353,16 @@ body.sectionHomePage .homepage-component>div h3 i {
   margin: 0 auto; /* centers horizontally */
   text-align: center;
 }
-.formAppContainer .form-group.field table td.subjects,
-.formAppContainer .form-group.field table th,
-.table td.subjects,
-.table th {
-    display: none !important;
+body.pupilTeachers div.no-data .icon:empty:after,
+body.pupilTeachers h1:before {
+    content: "";
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://king-s-bkk.github.io/rss-widget/Request%20New%20Parents%20and%20Guardians%20ID%20Badge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 </style>
