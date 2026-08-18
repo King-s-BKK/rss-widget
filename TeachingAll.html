@@ -30,32 +30,36 @@ body {
     font-size: 13px;
     font-weight: normal;
     text-align: left;
+    border: none;
 }
 
+/* Remove all vertical borders */
 .teacher-table th,
 .teacher-table td {
+    border-left: none !important;
+    border-right: none !important;
     padding: 6px 10px;
     text-align: left;
     vertical-align: top;
 }
 
-/* Teacher Name column */
+/* Teacher Name */
 .teacher-table th:nth-child(1),
 .teacher-table td:nth-child(1) {
-    width: 30%;
+    width: 15%;
     font-weight: bold;
 }
 
-/* Subject column - hide it */
+/* Hide Subject column */
 .teacher-table th:nth-child(2),
 .teacher-table td:nth-child(2) {
     display: none;
 }
 
-/* Email column - move closer to Teacher Name */
+/* Email Address */
 .teacher-table th:nth-child(3),
 .teacher-table td:nth-child(3) {
-    width: 70%;
+    width: 75%;
     padding-left: 5px;
 }
 
@@ -66,14 +70,27 @@ body {
     font-weight: normal;
 }
 
-/* Keep everything left aligned */
+/* Optional horizontal lines only */
+.teacher-table tr {
+    border-bottom: 1px solid #ddd;
+}
+
+/* No outer/vertical borders */
 .teacher-table,
-.teacher-table tbody,
 .teacher-table tr,
-.teacher-table td,
-.teacher-table th {
+.teacher-table th,
+.teacher-table td {
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/* Left alignment */
+.teacher-table,
+.teacher-table th,
+.teacher-table td {
     text-align: left !important;
 }
+</style>
 </style>
 
 <table class="teacher-table">
