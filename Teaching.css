@@ -364,5 +364,7 @@ body.pupilTeachers h1:before {
     background-repeat: no-repeat;
     background-position: center;
 }
-
+li[data-subset="my"] {
+    display: none !important;
+}
 </style>
