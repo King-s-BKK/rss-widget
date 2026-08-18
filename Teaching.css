@@ -488,6 +488,20 @@ body.studentDashboard div.no-data .icon:empty:after, body.studentDashboard h1:be
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-body.pupilTeachers .st-main-content table.teachers-table td.subjects {display:none;}
+/* Hide subjects column */
+.teachers-table .subjects {
+    display: none !important;
+}
+
+/* Hide "Subjects" heading on mobile */
+.teachers-table .head-subjects {
+    display: none !important;
+}
+
+/* Hide the main Subject table heading */
+.teachers-table th.academic + th,
+.teachers-table th:nth-child(2) {
+    display: none !important;
+}
 
 </style>
