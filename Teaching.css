@@ -488,6 +488,6 @@ body.studentDashboard div.no-data .icon:empty:after, body.studentDashboard h1:be
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-.formAppContainer .form-group.field table td, table.table td.subjects {display:none;}
+body.pupilTeachers .st-main-content table.teachers-table td.subjects {display:none;}
 
 </style>
