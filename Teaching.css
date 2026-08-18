@@ -1,0 +1,493 @@
+
+
+
+<head>
+
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+
+
+
+
+
+</head>
+
+<style>
+
+
+
+
+
+
+/* Top navigation bar link colors */
+nav ul li a,
+nav ul li span {
+  position: relative; /* needed if using ::before underline effect */
+  color: black !important;   /* default/base color */
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li span:hover {
+  color: #708fa5 !important; /* hover color: steel blue */
+  font-weight: bold;         /* bold text on hover */
+}
+
+nav ul li a::before,
+nav ul li span::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #708fa5; /* underline highlight in steel blue */
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+nav ul li a:hover::before,
+nav ul li span:hover::before {
+  transform: scaleX(1); /* reveal underline on hover */
+}
+
+
+
+/* Mobile navigation bar link styles */
+@media (max-width: 767.98px) {
+  nav ul li a,
+  nav ul li span {
+    position: relative;
+    color: white !important;   /* default/base color for mobile */
+    transition: color 0.3s ease, font-weight 0.3s ease;
+  }
+
+  nav ul li a:hover,
+  nav ul li span:hover {
+    color: #708fa5 !important; /* hover color: muted steel blue */
+    font-weight: bold;         /* bold text on hover */
+  }
+
+  nav ul li a::before,
+  nav ul li span::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #708fa5; /* underline highlight */
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+  }
+
+  nav ul li a:hover::before,
+  nav ul li span:hover::before {
+    transform: scaleX(1); /* reveal underline on hover */
+  }
+}
+
+
+
+
+
+
+
+.row.d-print-none {
+    display: none !important;
+}
+
+/* Expand main content to full width */
+.col-12.col-lg-9.content-wrapper.no-gutters {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+    width: 100% !important;
+
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+
+    left: 0 !important;
+    transform: none !important;
+}
+
+/* If parent row uses flexbox centering */
+.row {
+    justify-content: flex-start !important;
+}
+
+/* Remove container width restrictions */
+.container,
+.container-fluid {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+
+
+
+
+
+#right-myChildren-1 .fa-users {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    background: url('https://king-s-bkk.github.io/rss-widget/My%20Child_s%20Details.png') center center no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+#right-myChildren-1 .fa-users::before {
+    content: none !important;
+}
+
+
+
+#right-events-0 .far.fa-calendar-alt,
+#right-events-0 .far.fa-calendar-days {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    background: url('https://king-s-bkk.github.io/rss-widget/School%20Calendar.png') center center no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+#right-events-0 .fa-calendar-alt::before,
+#right-events-0 .fa-calendar-days::before {
+    content: none !important;
+}
+
+
+
+
+#middle-content-0 i.far.fa-square-poll-horizontal,
+#middle-content-0 i.far.fa-square-poll-horizontal{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    background: url('https://king-s-bkk.github.io/rss-widget/Weather%20widget.png') center center no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+#middle-content-0 .far.fa-square-poll-horizontal::before {
+    content: none !important;
+}
+
+
+
+
+
+
+#middle-content-1 i.far.fa-square-poll-horizontal,
+#middle-content-1 i.far.fa-square-poll-horizontal{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    background: url('https://king-s-bkk.github.io/rss-widget/News%20by%20Section.png') center center no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+#middle-content-1 .far.fa-square-poll-horizontal::before {
+    content: none !important;
+}
+
+
+
+
+
+#middle-content-2 i.far.fa-square-poll-horizontal,
+#middle-content-2 i.far.fa-square-poll-horizontal{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    background: url('https://king-s-bkk.github.io/rss-widget/Other%20Platforms.png') center center no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+#middle-content-2 .far.fa-square-poll-horizontal::before {
+    content: none !important;
+}
+
+
+
+#middle-content-3 i.far.fa-square-poll-horizontal,
+#middle-content-3 i.far.fa-square-poll-horizontal{
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 8px;
+    background: url('https://king-s-bkk.github.io/rss-widget/News%20feed.png') center center no-repeat;
+    background-size: contain;
+    vertical-align: middle;
+}
+
+#middle-content-3 .far.fa-square-poll-horizontal::before {
+    content: none !important;
+}
+
+
+
+
+
+
+
+tr.alexa {
+  display: none;
+}
+
+.settings-table tbody tr:nth-child(5) {
+  display: none;
+}
+
+
+td.show-tutorial {
+  display: none;
+}
+
+@media (max-width: 767.98px) {
+  body.formGroup table.settings-table tr td.show-tutorial,td.show-tutorial,
+  body.myAccount table.settings-table tr td.show-tutorial, .settings-table tbody tr:nth-child(5) ,settings-table tbody tr:nth-child() , table.settings-table td.show-tutorial {
+    display: none;
+  }
+}
+
+
+
+
+@media (max-width: 767.98px) {
+  /* Hide <td> cells for tutorial and Alexa */
+  body.formGroup table.settings-table td.show-tutorial,
+  body.formGroup table.settings-table td.alexa,
+  body.myAccount table.settings-table td.show-tutorial,
+  body.myAccount table.settings-table td.alexa {
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    border: none;
+  }
+
+  /* Hide <th> cells in rows containing tutorial or Alexa */
+  body.formGroup table.settings-table tr:has(td.show-tutorial) th,
+  body.formGroup table.settings-table tr:has(td.alexa) th,
+  body.myAccount table.settings-table tr:has(td.show-tutorial) th,
+  body.myAccount table.settings-table tr:has(td.alexa) th {
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    border: none;
+  }
+
+  /* Hide <th> and <td> directly marked with Alexa class */
+  body.formGroup table.settings-table th.alexa,
+  body.formGroup table.settings-table td.alexa,
+  body.myAccount table.settings-table th.alexa,
+  body.myAccount table.settings-table td.alexa {
+    display: none;
+    padding: 0;
+    margin: 0;
+    height: 0;
+    border: none;
+  }
+
+  /* Hide entire <tr> if it contains Alexa */
+  body.formGroup table.settings-table tr:has(td.alexa),
+  body.myAccount table.settings-table tr:has(td.alexa),
+  body.formGroup table.settings-table tr.alexa,
+  body.myAccount table.settings-table tr.alexa {
+    display: none;
+  }
+}
+
+
+
+
+ div.st-main-content:nth-of-type(2) {
+  display: none;
+}
+
+
+body.studentDashboard .widget-dashboard, div.st-sidebar-container {
+
+display: none
+
+}
+
+
+div.wysiwyg-content table td {
+1px solid #fff!important}
+
+
+  /* Remove all borders from table and its children */
+  .desktop-content table,
+  .desktop-content td,
+  .desktop-content th,
+  .desktop-content figure,
+  .desktop-content iframe {
+    border: none !important;
+    outline: none !important;
+  }
+
+  .desktop-content table {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    font-family: 'Lato', sans-serif !important;
+  }
+
+  .desktop-content td {
+    vertical-align: top !important;
+  }
+
+
+
+body h1:before, div.st-cm-main-content h1 :before, body.eventsCalendar h1:before, .btn.btn-info
+
+{
+color: #8DBAED !important
+}
+
+
+.btn.btn-primary 
+{
+background-color: #8DBAED !important
+
+}
+
+body.rssFeed article>h3 {
+background-color: #8DBAED !important
+
+}
+
+
+.btn.btn-info, .btn.btn-primary
+{
+background-color: #8DBAED !important;
+color: white !important
+}
+
+
+.fa-calendar-alt, .fa-users, 
+.fa-calendar-days {
+  color: #8DBAED !important;
+}
+
+.fa-calendar-alt::before, .fa-users::before,
+.fa-calendar-days::before {
+  content: "\f073";
+  color: #8DBAED !important;
+}
+
+div.no-data div.icon {
+    background-color: #8DBAED!important;
+   }
+
+
+
+   body {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+  }
+
+  h1, h2, h3, h4, h5, h6, .header-text, body.sectionHomePage .homepage-component>div h3 , h3 a {
+font-family: 'Lato', sans-serif;
+
+    font-weight: 400
+  }
+
+  .desktop-content, .mobile-content,
+  .desktop-content * , .mobile-content * {
+    border: 1px solid transparent !important;
+  }
+
+  .mobile-content {
+    display: none;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .desktop-content {
+      display: none;
+    }
+    .mobile-content {
+      display: block;
+    }
+  }
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+/* Main footer container */
+footer.d-print-none {
+  background-color: #8DBAED !important;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  color: black;
+  padding-right: 20px; /* Adds spacing from the right edge */
+}
+
+/* Hide all existing children inside footer */
+footer.d-print-none * {
+  display: none;
+}
+
+/* Custom text overlay via ::before pseudo-element */
+footer.d-print-none::before {
+  content: "© King's College International School Bangkok 2025. All Rights Reserved";
+  display: block;
+  text-align: right;
+  color: white;
+  font-size: 14px;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif !important;
+  width: 100%;
+  padding-right: 20px;
+}
+
+/* Fixing selector for the Font Awesome icon */
+.far.fa-square-poll-horizontal {
+  color: #8DBAED !important;
+}
+body.sectionHomePage .homepage-component>div h3 i {
+ #8DBAED !important;
+}
+
+
+.embed-content {
+  width: auto; /* or any fixed width */
+  margin: 0 auto; /* centers horizontally */
+  text-align: center;
+}
+body.studentDashboard div.no-data .icon:empty:after, body.studentDashboard h1:before {
+    content: "";
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    background-image: url('https://king-s-bkk.github.io/rss-widget/Request%20New%20Parents%20and%20Guardians%20ID%20Badge.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+.formAppContainer .form-group.field table td, table.table td.subjects {display:none;}
+
+</style>
