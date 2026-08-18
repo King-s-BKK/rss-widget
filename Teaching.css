@@ -364,5 +364,10 @@ body.pupilTeachers h1:before {
     background-repeat: no-repeat;
     background-position: center;
 }
+.nav-tabs li[data-subset="my"] {
+    color: white;
+    cursor:none;
+    pointer-events:none;
+}
 
 </style>
