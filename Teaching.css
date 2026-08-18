@@ -479,28 +479,10 @@ body.sectionHomePage .homepage-component>div h3 i {
   margin: 0 auto; /* centers horizontally */
   text-align: center;
 }
-body.studentDashboard div.no-data .icon:empty:after, body.studentDashboard h1:before {
-    content: "";
-    display: inline-block;
-    width: 30px;
-    height: 30px;
-    background-image: url('https://king-s-bkk.github.io/rss-widget/Request%20New%20Parents%20and%20Guardians%20ID%20Badge.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-/* Hide subjects column */
-.teachers-table .subjects {
-    display: none !important;
-}
-
-/* Hide "Subjects" heading on mobile */
-.teachers-table .head-subjects {
-    display: none !important;
-}
-
-/* Hide the main Subject table heading */
-.teachers-table th.academic + th,
-.teachers-table th:nth-child(2) {
+.formAppContainer .form-group.field table td.subjects,
+.formAppContainer .form-group.field table th,
+.table td.subjects,
+.table th {
     display: none !important;
 }
 
