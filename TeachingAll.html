@@ -22,32 +22,33 @@ body {
   overflow: hidden;
 }
 
+
 .teacher-table {
     width: 100%;
     border-collapse: collapse;
     table-layout: fixed;
-    font-family: Lato, Arial, sans-serif;
-    font-size: 13px;
+    font-family: "Lato", Arial, sans-serif;
+    font-size: 14px;
     font-weight: normal;
     text-align: left;
     border: none;
 }
 
-/* Remove all vertical borders */
+/* All cells */
 .teacher-table th,
 .teacher-table td {
+    padding: 8px 10px;
+    text-align: left !important;
+    vertical-align: top;
     border-left: none !important;
     border-right: none !important;
-    padding: 6px 10px;
-    text-align: left;
-    vertical-align: top;
 }
 
-/* Teacher Name */
+/* Teacher Name column */
 .teacher-table th:nth-child(1),
 .teacher-table td:nth-child(1) {
     width: 15%;
-    font-weight: bold;
+    font-weight: normal !important;
 }
 
 /* Hide Subject column */
@@ -56,7 +57,7 @@ body {
     display: none;
 }
 
-/* Email Address */
+/* Email Address column */
 .teacher-table th:nth-child(3),
 .teacher-table td:nth-child(3) {
     width: 75%;
@@ -70,12 +71,17 @@ body {
     font-weight: normal;
 }
 
-/* Optional horizontal lines only */
-.teacher-table tr {
-    border-bottom: 1px solid #ddd;
+/* Horizontal line between each record */
+.teacher-table tbody tr {
+    border-bottom: 1px solid #d9d9d9;
 }
 
-/* No outer/vertical borders */
+/* Header line */
+.teacher-table thead tr {
+    border-bottom: 1px solid #999;
+}
+
+/* Remove vertical borders everywhere */
 .teacher-table,
 .teacher-table tr,
 .teacher-table th,
@@ -83,15 +89,8 @@ body {
     border-left: none !important;
     border-right: none !important;
 }
+</style>
 
-/* Left alignment */
-.teacher-table,
-.teacher-table th,
-.teacher-table td {
-    text-align: left !important;
-}
-</style>
-</style>
 
 <table class="teacher-table">
   <thead>
