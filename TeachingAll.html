@@ -14,7 +14,7 @@
 
 
 <style>
-  .teacher-table {
+ .teacher-table {
   width: 100%;
   border-collapse: collapse;
   font-family: "Lato", sans-serif;
@@ -33,14 +33,12 @@
   font-weight: 400;
 }
 
-.teacher-table th {
-  font-weight: 400;
+/* Teacher name */
+.teacher-table td:first-child {
+  font-weight: 700;
 }
 
-.teacher-table tr:last-child td {
-  border-bottom: none;
-}
-
+/* Email */
 .teacher-table a {
   color: #0066cc;
   text-decoration: none;
@@ -50,6 +48,10 @@
 .teacher-table a:hover {
   color: #004c99;
   text-decoration: underline;
+}
+
+.teacher-table tr:last-child td {
+  border-bottom: none;
 }
 </style>
 
