@@ -364,10 +364,17 @@ body.pupilTeachers h1:before {
     background-repeat: no-repeat;
     background-position: center;
 }
+/* Hide  teachers tab */
 .nav-tabs li[data-subset="my"] {
-    color: white;
-    cursor:none;
-    pointer-events:none;
+    display: none;
+}
+
+/* Make All teachers appear active */
+.nav-tabs li[data-subset="all"] {
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
 }
 
 </style>
