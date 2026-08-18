@@ -365,7 +365,7 @@ body.pupilTeachers h1:before {
     background-position: center;
 }
 
-body.pupilTeachers div.st-main-content > div.subset-select .nav li[data-subset="my"] {
+li[data-action="change-subset"][data-subset="my"] {
     display: none !important;
 }
 </style>
