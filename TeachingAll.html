@@ -21,9 +21,11 @@ body {
   width: 100%;
   overflow: hidden;
 }
+
 .teacher-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
     font-family: Lato, Arial, sans-serif;
     font-size: 13px;
     font-weight: normal;
@@ -33,31 +35,44 @@ body {
 .teacher-table th,
 .teacher-table td {
     padding: 6px 10px;
-    border: 1px solid #ddd;
     text-align: left;
+    vertical-align: top;
 }
 
-.teacher-table th {
+/* Teacher Name column */
+.teacher-table th:nth-child(1),
+.teacher-table td:nth-child(1) {
+    width: 30%;
     font-weight: bold;
 }
 
-.teacher-table td:first-child {
-    font-weight: bold;
-}
-
-.teacher-table a {
-    color: blue;
-    text-decoration: none;
-}
-
-.teacher-table a:hover {
-    text-decoration: underline;
-}
-
-/* Hide the Subject column */
+/* Subject column - hide it */
 .teacher-table th:nth-child(2),
 .teacher-table td:nth-child(2) {
     display: none;
+}
+
+/* Email column - move closer to Teacher Name */
+.teacher-table th:nth-child(3),
+.teacher-table td:nth-child(3) {
+    width: 70%;
+    padding-left: 5px;
+}
+
+/* Email links */
+.teacher-table td:nth-child(3) a {
+    color: blue;
+    text-decoration: none;
+    font-weight: normal;
+}
+
+/* Keep everything left aligned */
+.teacher-table,
+.teacher-table tbody,
+.teacher-table tr,
+.teacher-table td,
+.teacher-table th {
+    text-align: left !important;
 }
 </style>
 
