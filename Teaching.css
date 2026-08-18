@@ -366,7 +366,7 @@ body.pupilTeachers h1:before {
 }
 /* Hide  teachers tab */
 .nav-tabs li[data-subset="my"] {
-    display: none !important;
+    display: none;
 }
 
 /* Make All teachers appear active */
