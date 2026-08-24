@@ -81,9 +81,9 @@
 <div id="rss-feed">Loading feed...</div>
 
 <script>
-const feedUrl =
-  
-'https://script.google.com/macros/s/AKfycbwVok1xc89LLdQoQv7AVDVfWQVeXWb9oomUuvVLvKCDVffUhcRF8Y3U-Muq9AK6R9iJrA/exec';
+const feedUrl = 
+  'https://script.google.com/macros/s/AKfycbwVok1xc89LLdQoQv7AVDVfWQVeXWb9oomUuvVLvKCDVffUhcRF8Y3U-Muq9AK6R9iJrA/exec';
+
 fetch(feedUrl)
   .then(response => {
     if (!response.ok) {
@@ -91,9 +91,12 @@ fetch(feedUrl)
     }
     return response.json();
   })
-  .then(items => {
+  .then(data => {
     const container = document.getElementById('rss-feed');
     container.innerHTML = '';
+
+    // Adjust depending on how your Apps Script returns data
+    const items = data.items || data;
 
     if (!items || items.length === 0) {
       container.innerText = 'No Whole School News';
@@ -104,22 +107,18 @@ fetch(feedUrl)
       const div = document.createElement('div');
       div.className = 'rss-item';
 
-      const formattedDate = new Date(item.pubDate)
-        .toLocaleDateString('en-GB');
+      const formattedDate = item.pubDate 
+        ? new Date(item.pubDate).toLocaleDateString('en-GB') 
+        : '';
 
       div.innerHTML = `
         <div class="rss-row">
           <div class="rss-title">
-            <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284"
-               target="_blank"
-               rel="noopener noreferrer">
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer">
               ${item.title}
             </a>
           </div>
-
-          <div class="rss-date">
-            ${formattedDate}
-          </div>
+          <div class="rss-date">${formattedDate}</div>
         </div>
       `;
 
