@@ -40,14 +40,6 @@
       text-decoration: underline;
     }
 
-    .rss-date {
-      text-align: right;
-      white-space: nowrap;
-      color: #666;
-      font-size: 11px;
-      line-height: 15px;
-    }
-
     @media (max-width: 600px) {
       #rss-feed {
         padding: 5px;
@@ -55,10 +47,6 @@
 
       .rss-title a {
         font-size: 12px;
-      }
-
-      .rss-date {
-        font-size: 10px;
       }
     }
   </style>
@@ -100,7 +88,7 @@ fetch(feedUrl)
 
       div.innerHTML = `
         <div class="rss-title">
-          <a href="${link.getAttribute('href') !== 'null' ? link.href : '#'}"
+          <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284"
              target="_blank" rel="noopener noreferrer">
             ${link.textContent}
           </a>
