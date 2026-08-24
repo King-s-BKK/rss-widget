@@ -28,13 +28,6 @@
       margin-bottom: 8px;
     }
 
-    .rss-row {
-      display: grid;
-      grid-template-columns: 1fr 95px;
-      gap: 10px;
-      align-items: start;
-    }
-
     .rss-title a {
       color: #0077cc;
       text-decoration: none;
@@ -54,25 +47,6 @@
       font-size: 11px;
       line-height: 15px;
     }
-
-    @media (max-width: 600px) {
-      #rss-feed {
-        padding: 5px;
-      }
-
-      .rss-row {
-        grid-template-columns: 1fr 80px;
-        gap: 5px;
-      }
-
-      .rss-title a {
-        font-size: 12px;
-      }
-
-      .rss-date {
-        font-size: 10px;
-      }
-    }
   </style>
 </head>
 
@@ -86,39 +60,33 @@ const feedUrl =
 
 fetch(feedUrl)
   .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+    if (!response.ok) throw new Error('Network response was not ok');
+    return response.text(); // <-- Expect HTML, not JSON
   })
-  .then(data => {
+  .then(html => {
     const container = document.getElementById('rss-feed');
     container.innerHTML = '';
 
-    // Adjust depending on how your Apps Script returns data
-    const items = data.items || data;
-
-    if (!items || items.length === 0) {
+    if (!html || html.trim() === '') {
       container.innerText = 'No Whole School News';
       return;
     }
 
-    items.forEach(item => {
+    // Parse the returned HTML string
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const links = doc.querySelectorAll('a');
+
+    links.forEach(link => {
       const div = document.createElement('div');
       div.className = 'rss-item';
 
-      const formattedDate = item.pubDate 
-        ? new Date(item.pubDate).toLocaleDateString('en-GB') 
-        : '';
-
       div.innerHTML = `
-        <div class="rss-row">
-          <div class="rss-title">
-            <a href="${item.link}" target="_blank" rel="noopener noreferrer">
-              ${item.title}
-            </a>
-          </div>
-          <div class="rss-date">${formattedDate}</div>
+        <div class="rss-title">
+          <a href="${link.getAttribute('href') !== 'null' ? link.href : '#'}" 
+             target="_blank" rel="noopener noreferrer">
+            ${link.textContent}
+          </a>
         </div>
       `;
 
@@ -127,8 +95,7 @@ fetch(feedUrl)
   })
   .catch(error => {
     console.error('Error fetching RSS:', error);
-    document.getElementById('rss-feed').innerText =
-      'Failed to load feed.';
+    document.getElementById('rss-feed').innerText = 'Failed to load feed.';
   });
 </script>
 
