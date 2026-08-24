@@ -47,6 +47,20 @@
       font-size: 11px;
       line-height: 15px;
     }
+
+    @media (max-width: 600px) {
+      #rss-feed {
+        padding: 5px;
+      }
+
+      .rss-title a {
+        font-size: 12px;
+      }
+
+      .rss-date {
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 
@@ -55,13 +69,13 @@
 <div id="rss-feed">Loading feed...</div>
 
 <script>
-const feedUrl = 
+const feedUrl =
   'https://script.google.com/macros/s/AKfycbwVok1xc89LLdQoQv7AVDVfWQVeXWb9oomUuvVLvKCDVffUhcRF8Y3U-Muq9AK6R9iJrA/exec';
 
 fetch(feedUrl)
   .then(response => {
     if (!response.ok) throw new Error('Network response was not ok');
-    return response.text(); // <-- Expect HTML, not JSON
+    return response.text(); // Expect HTML, not JSON
   })
   .then(html => {
     const container = document.getElementById('rss-feed');
@@ -75,15 +89,18 @@ fetch(feedUrl)
     // Parse the returned HTML string
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
-    const links = doc.querySelectorAll('a');
+    const items = doc.querySelectorAll('p');
 
-    links.forEach(link => {
+    items.forEach(p => {
+      const link = p.querySelector('a');
+      if (!link) return;
+
       const div = document.createElement('div');
       div.className = 'rss-item';
 
       div.innerHTML = `
         <div class="rss-title">
-          <a href="${link.getAttribute('href') !== 'null' ? link.href : '#'}" 
+          <a href="${link.getAttribute('href') !== 'null' ? link.href : '#'}"
              target="_blank" rel="noopener noreferrer">
             ${link.textContent}
           </a>
