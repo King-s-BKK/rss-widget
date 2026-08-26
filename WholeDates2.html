@@ -104,22 +104,21 @@ fetch(feedUrl)
       const div = document.createElement('div');
       div.className = 'rss-item';
 
-      const formattedDate = new Date(item.pubDate)
-        .toLocaleDateString('en-GB');
+      // Format date as dd/mm/yyyy
+      const d = new Date(item.pubDate);
+      const formattedDate = `${String(d.getDate()).padStart(2,'0')}/${
+        String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
 
       div.innerHTML = `
         <div class="rss-row">
           <div class="rss-title">
-            <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284"
+            <a href="${item.link || '#'}"
                target="_blank"
                rel="noopener noreferrer">
               ${item.title}
             </a>
           </div>
-
-          <div class="rss-date">
-            ${formattedDate}
-          </div>
+          <div class="rss-date">${formattedDate}</div>
         </div>
       `;
 
