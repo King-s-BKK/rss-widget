@@ -161,16 +161,8 @@ fetch(feedUrl)
         ? titleElement.textContent.trim()
         : '';
 
-     const fallbackUrl =
-  'https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284';
+  const link = 'https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284';
 
-let link = titleElement
-  ? titleElement.getAttribute('href')
-  : '';
-
-if (!link || link === '#') {
-  link = fallbackUrl;
-}
 
       const date = dateElement
         ? dateElement.textContent.trim()
