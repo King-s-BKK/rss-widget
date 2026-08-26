@@ -5,42 +5,30 @@
   <title>RSS Feed Widget</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-
   <style>
-    html, body {
+    body {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
       margin: 0;
-      padding: 0;
-      width: 100%;
-      height: auto;
-      font-family: 'Lato', sans-serif;
-      font-size: 12px;
-      font-weight: 300;
+      padding: 20px;
     }
 
     #rss-feed {
-      padding: 10px;
-    }
-
-    .rss-item {
-      border-bottom: 1px solid #ddd;
-      padding: 6px 0;
-      margin-bottom: 8px;
+      max-width: 600px;
+      margin: auto;
     }
 
     .rss-row {
-      display: grid;
-      grid-template-columns: 1fr 95px;
-      gap: 10px;
-      align-items: start;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #ddd; /* Divider line */
     }
 
     .rss-title a {
       color: #0077cc;
       text-decoration: none;
-      font-size: 12px;
-      line-height: 15px;
-      display: block;
     }
 
     .rss-title a:hover {
@@ -48,90 +36,47 @@
     }
 
     .rss-date {
-      text-align: right;
-      white-space: nowrap;
       color: #666;
-      font-size: 11px;
-      line-height: 15px;
-    }
-
-    @media (max-width: 600px) {
-      #rss-feed {
-        padding: 5px;
-      }
-
-      .rss-row {
-        grid-template-columns: 1fr 80px;
-        gap: 5px;
-      }
-
-      .rss-title a {
-        font-size: 12px;
-      }
-
-      .rss-date {
-        font-size: 10px;
-      }
+      font-size: 13px;
+      white-space: nowrap;
     }
   </style>
 </head>
-
 <body>
 
 <div id="rss-feed">Loading feed...</div>
 
 <script>
-const feedUrl =
-'https://script.google.com/macros/s/AKfycbzMgApL3qU-cf-Kd7QzGd778jo-kLVhf9vCw8t8IgtkS0oPv38kMp15AwctL9XJb6BoVQ/exec';
+const feedUrl = "https://script.googleusercontent.com/a/macros/kingsbangkok.ac.th/echo?user_content_key=AUkAhnSSz48DN0qRmeHGNnSEPMz8KaZTsgOAi_1QHhy7P28M7sHC_xSmsUXIH19tc4N9dpKTrBKkFQF6wg2mKLKW9kg8krCq4yPf1YxKrcxal4EaX0Hyi1kn_xnY2NxW-Vq_Ko9P9T4gqWCAy3qyB-apmi_CMqcmNls4Lja214yzgqWPXAq_9JPJXwOV1vdPN2ve267Chwl1Opv9_7y5FvAZytEXOIvCOMFteRFwhu-I4ily4kcz_E5T--rhwXijcU79jd5h0eU0mUAEF3_dlEssgZQ2GtF0f_3jK4Svi52o6ynED8-jtS0FH8HKkA08qg&lib=Meds3W3wlHTnFBNQH4TgQ38czIEwHG0G6";
 
 fetch(feedUrl)
   .then(response => {
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
-    return response.json();
+    if (!response.ok) throw new Error("Network response was not ok");
+    return response.text(); // Expect HTML
   })
-  .then(items => {
-    const container = document.getElementById('rss-feed');
-    container.innerHTML = '';
+  .then(html => {
+    const container = document.getElementById("rss-feed");
+    container.innerHTML = "";
 
-    if (!items || items.length === 0) {
-      container.innerText = 'No Whole School News';
+    if (!html || html.trim() === "") {
+      container.innerText = "No feed available";
       return;
     }
 
-    items.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'rss-item';
+    // Parse the returned HTML string
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+    const rows = doc.querySelectorAll(".rss-row");
 
-      // Format date as dd/mm/yyyy
-      const d = new Date(item.pubDate);
-      const formattedDate = `${String(d.getDate()).padStart(2,'0')}/${
-        String(d.getMonth()+1).padStart(2,'0')}/${d.getFullYear()}`;
-
-      div.innerHTML = `
-        <div class="rss-row">
-          <div class="rss-title">
-            <a href="${item.link || '#'}"
-               target="_blank"
-               rel="noopener noreferrer">
-              ${item.title}
-            </a>
-          </div>
-          <div class="rss-date">${formattedDate}</div>
-        </div>
-      `;
-
-      container.appendChild(div);
+    rows.forEach(row => {
+      container.appendChild(row);
     });
   })
   .catch(error => {
-    console.error('Error fetching RSS:', error);
-    document.getElementById('rss-feed').innerText =
-      'Failed to load feed.';
+    console.error("Error fetching RSS:", error);
+    document.getElementById("rss-feed").innerText = "Failed to load feed.";
   });
 </script>
 
 </body>
 </html>
-
