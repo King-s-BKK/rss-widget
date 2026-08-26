@@ -82,7 +82,7 @@
 
 <script>
 const feedUrl =
-  'https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLiNCo25bpeQ51RkuGsuO4Gp3auS8vth4oDR4WOnjCXCeUhdxFbRFd8bA11H7gteSyxdBQQxCAP0lbYa7e9FiE3uRsaX7Wo60kbxV2LIUBlHgdu-dVBo1PlG1_GnUugSIovn5r_GCPar25KUZfvUzTeR2sk0O34GypEDcy0-aExTksNiykJ5_GoMccCdQHl2O1WHvul4mKY_vJ0F-eh8GpcWjcuwceYwwK7t4oyNwNTFyYiRRFkwweEJPLwISk11F4lxkBn04l70Yzd4lsK_fan-j9DqX_PHwA_5VBJG&lib=MXGr9N6W1-S0xK77rJg80n3GeyEJYk-XO';
+'https://script.google.com/macros/s/AKfycbwVok1xc89LLdQoQv7AVDVfWQVeXWb9oomUuvVLvKCDVffUhcRF8Y3U-Muq9AK6R9iJrA/exec';
 
 fetch(feedUrl)
   .then(response => {
@@ -96,7 +96,7 @@ fetch(feedUrl)
     container.innerHTML = '';
 
     if (!items || items.length === 0) {
-      container.innerText = 'No Early Years School News';
+      container.innerText = 'No Whole School News';
       return;
     }
 
@@ -110,7 +110,7 @@ fetch(feedUrl)
       div.innerHTML = `
         <div class="rss-row">
           <div class="rss-title">
-            <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/285"
+            <a href="https://king-s-college-international-school-bangkok.myschoolportal.co.uk/feed/284"
                target="_blank"
                rel="noopener noreferrer">
               ${item.title}
